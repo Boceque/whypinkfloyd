@@ -1134,6 +1134,7 @@
                 <div class="section-header">
                     <h2 class="section-title">Yazılar</h2>
                     <button class="btn" id="newPostButtonAlt"><i class="fas fa-plus"></i> Yeni Yazı</button>
+                    <button class="btn" id="exportBlogJSON" style="margin-left: 10px; background-color: #004d00;"><i class="fas fa-download"></i> JSON Olarak İndir</button>
                 </div>
                 
                 <div id="emptyPostsState" class="empty-state">
@@ -3145,6 +3146,310 @@
                         });
                     });
                 }
+            }
+            
+            // Blog içeriğini JSON olarak indirme fonksiyonu
+            const exportBlogJSON = document.getElementById('exportBlogJSON');
+            if (exportBlogJSON) {
+                exportBlogJSON.addEventListener('click', function() {
+                    exportBlogPostsAsJSON();
+                });
+            }
+            
+            // Blog yazılarını JSON olarak indirme
+            function exportBlogPostsAsJSON() {
+                // localStorage'dan blog yazılarını al
+                const blogPosts = localStorage.getItem('matrixBlogPosts');
+                
+                if (blogPosts) {
+                    try {
+                        // Verileri biçimlendir (güzel görünsün diye)
+                        const formattedData = JSON.stringify(JSON.parse(blogPosts), null, 2);
+                        
+                        // İndirilebilir dosya oluştur
+                        const blob = new Blob([formattedData], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        
+                        // Tarih bilgisi oluştur
+                        const now = new Date();
+                        const dateStr = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+                        
+                        // İndirme bağlantısı oluştur
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `blog-posts-${dateStr}.json`;
+                        
+                        // Bağlantıyı tıkla ve temizle
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        
+                        // Kullanıcıya bilgi ver
+                        showToast('Blog yazıları başarıyla JSON dosyası olarak indirildi.', 'success');
+                    } catch (error) {
+                        console.error('JSON dışa aktarma hatası:', error);
+                        showToast('JSON dışa aktarma sırasında bir hata oluştu.', 'error');
+                    }
+                } else {
+                    showToast('İndirilecek blog yazısı bulunamadı.', 'error');
+                }
+            }
+            
+            // GitHub modal ve entegrasyon fonksiyonları
+            function showGitHubPushModal() {
+                // GitHub modal şablonu
+                const modalHTML = `
+                <div id="gitHubPushModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>GitHub'a Gönder</h2>
+                            <span class="modal-close">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <p>Blog içeriğinizi GitHub'a JSON olarak göndermek için lütfen aşağıdaki bilgileri girin:</p>
+                            
+                            <div class="form-group">
+                                <label for="githubUsername">GitHub Kullanıcı Adı</label>
+                                <input type="text" id="githubUsername" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="githubRepo">Repository Adı</label>
+                                <input type="text" id="githubRepo" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="githubToken">Personal Access Token</label>
+                                <input type="password" id="githubToken" class="form-control" required>
+                                <small style="display: block; margin-top: 5px; opacity: 0.7;">
+                                    <i class="fas fa-info-circle"></i> 
+                                    GitHub'dan bir <a href="https://github.com/settings/tokens" target="_blank">Personal Access Token</a> almanız gerekiyor.
+                                    Token'a "repo" yetkisi vermeyi unutmayın.
+                                </small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="githubPath">Dosya Yolu (örn: data/blog-posts.json)</label>
+                                <input type="text" id="githubPath" class="form-control" value="data/blog-posts.json" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="githubCommitMsg">Commit Mesajı</label>
+                                <input type="text" id="githubCommitMsg" class="form-control" value="Blog içeriği güncellendi" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="githubPushSubmitBtn" class="btn"><i class="fab fa-github"></i> Gönder</button>
+                            <button id="githubPushCancelBtn" class="btn btn-cancel">İptal</button>
+                        </div>
+                    </div>
+                </div>
+                `;
+                
+                // Modal'ı ekle
+                const modalContainer = document.createElement('div');
+                modalContainer.innerHTML = modalHTML;
+                document.body.appendChild(modalContainer.firstElementChild);
+                
+                const modal = document.getElementById('gitHubPushModal');
+                const closeBtn = modal.querySelector('.modal-close');
+                const cancelBtn = document.getElementById('githubPushCancelBtn');
+                const submitBtn = document.getElementById('githubPushSubmitBtn');
+                
+                // Modal'ı göster
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Kapatma işlevleri
+                function closeModal() {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    document.body.removeChild(modal);
+                }
+                
+                closeBtn.addEventListener('click', closeModal);
+                cancelBtn.addEventListener('click', closeModal);
+                
+                // Dışarı tıklayınca kapat
+                window.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        closeModal();
+                    }
+                });
+                
+                // GitHub'a gönderme işlevi
+                submitBtn.addEventListener('click', function() {
+                    const username = document.getElementById('githubUsername').value.trim();
+                    const repo = document.getElementById('githubRepo').value.trim();
+                    const token = document.getElementById('githubToken').value.trim();
+                    const path = document.getElementById('githubPath').value.trim();
+                    const commitMsg = document.getElementById('githubCommitMsg').value.trim();
+                    
+                    if (!username || !repo || !token || !path) {
+                        showToast('Lütfen tüm alanları doldurun.', 'error');
+                        return;
+                    }
+                    
+                    // Blog verilerini al
+                    const blogPosts = localStorage.getItem('matrixBlogPosts');
+                    if (!blogPosts) {
+                        showToast('Gönderilecek blog içeriği bulunamadı.', 'error');
+                        return;
+                    }
+                    
+                    // Gönderme işlemini başlat
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
+                    
+                    // GitHub API kullanarak dosyayı gönder
+                    pushToGitHub(username, repo, token, path, blogPosts, commitMsg)
+                        .then(response => {
+                            if (response.ok) {
+                                showToast('Blog içeriği başarıyla GitHub\'a gönderildi.', 'success');
+                                closeModal();
+                                
+                                // Başarılı gönderim bilgilerini sakla
+                                const githubInfo = {
+                                    username,
+                                    repo,
+                                    path,
+                                    lastUpdate: new Date().toISOString()
+                                };
+                                localStorage.setItem('matrixBlogGitHubInfo', JSON.stringify(githubInfo));
+                            } else {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('GitHub gönderim hatası:', error);
+                            showToast('GitHub\'a gönderme sırasında bir hata oluştu.', 'error');
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fab fa-github"></i> Gönder';
+                        });
+                });
+            }
+            
+            // GitHub'a dosya gönderme fonksiyonu
+            async function pushToGitHub(username, repo, token, path, content, commitMsg) {
+                // GitHub API URL
+                const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
+                
+                try {
+                    // Mevcut dosyayı kontrol et
+                    const checkResponse = await fetch(apiUrl, {
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    
+                    let sha;
+                    if (checkResponse.ok) {
+                        // Dosya varsa SHA değerini al
+                        const fileData = await checkResponse.json();
+                        sha = fileData.sha;
+                    }
+                    
+                    // İçeriği Base64'e çevir
+                    const encoder = new TextEncoder();
+                    const data = encoder.encode(content);
+                    const base64Content = btoa(String.fromCharCode.apply(null, new Uint8Array(data)));
+                    
+                    // API isteği gönder
+                    const requestBody = {
+                        message: commitMsg,
+                        content: base64Content
+                    };
+                    
+                    // Eğer dosya zaten varsa, SHA değerini ekle
+                    if (sha) {
+                        requestBody.sha = sha;
+                    }
+                    
+                    // PUT isteği ile dosyayı gönder
+                    return fetch(apiUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/vnd.github.v3+json'
+                        },
+                        body: JSON.stringify(requestBody)
+                    });
+                } catch (error) {
+                    console.error('GitHub API hatası:', error);
+                    throw error;
+                }
+            }
+            
+            // Bildirim gösterme fonksiyonu
+            function showToast(message, type = 'info') {
+                // Eğer toast container yoksa oluştur
+                let toastContainer = document.getElementById('toast-container');
+                if (!toastContainer) {
+                    toastContainer = document.createElement('div');
+                    toastContainer.id = 'toast-container';
+                    toastContainer.style.cssText = `
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        z-index: 9999;
+                    `;
+                    document.body.appendChild(toastContainer);
+                }
+                
+                // Toast elementi oluştur
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+                toast.style.cssText = `
+                    min-width: 250px;
+                    margin-top: 10px;
+                    padding: 15px;
+                    border-radius: 4px;
+                    background-color: var(--matrix-black);
+                    color: var(--matrix-green);
+                    border: 1px solid var(--matrix-dark-green);
+                    box-shadow: var(--glow-shadow);
+                    animation: fadeIn 0.3s, fadeOut 0.5s 2.5s forwards;
+                    opacity: 0.9;
+                `;
+                
+                // İkon seç
+                let icon = 'info-circle';
+                if (type === 'success') icon = 'check-circle';
+                if (type === 'error') icon = 'exclamation-circle';
+                if (type === 'warning') icon = 'exclamation-triangle';
+                
+                // Toast içeriği
+                toast.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+                
+                // Toast'ı ekle
+                toastContainer.appendChild(toast);
+                
+                // Animasyon stilleri
+                if (!document.getElementById('toast-animations')) {
+                    const style = document.createElement('style');
+                    style.id = 'toast-animations';
+                    style.textContent = `
+                        @keyframes fadeIn {
+                            from { opacity: 0; transform: translateY(20px); }
+                            to { opacity: 0.9; transform: translateY(0); }
+                        }
+                        @keyframes fadeOut {
+                            from { opacity: 0.9; transform: translateY(0); }
+                            to { opacity: 0; transform: translateY(-20px); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                // Belirli süre sonra toast'ı kaldır
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 3000);
             }
         }
     </script>
