@@ -1,0 +1,889 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & News | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--matrix-green);
+            position: relative;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .content-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .news-card {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .news-image {
+            height: 180px;
+            background-color: var(--matrix-dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--matrix-green);
+            border-bottom: 1px solid var(--matrix-green);
+            font-size: 1.3rem;
+            font-weight: bold;
+            background-image: linear-gradient(to bottom right, rgba(0, 30, 0, 0.8), rgba(0, 60, 0, 0.4));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.1) 25%, transparent 25%,
+                                        transparent 50%, rgba(0, 255, 65, 0.1) 50%,
+                                        rgba(0, 255, 65, 0.1) 75%, transparent 75%);
+            background-size: 10px 10px;
+            opacity: 0.3;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--matrix-green);
+        }
+        
+        .news-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .featured-news {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .featured-news:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .featured-image {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--matrix-dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--matrix-green);
+            border-right: 1px solid var(--matrix-green);
+            font-size: 1.5rem;
+            font-weight: bold;
+            background-image: linear-gradient(to bottom right, rgba(0, 30, 0, 0.8), rgba(0, 60, 0, 0.4));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.1) 25%, transparent 25%,
+                                        transparent 50%, rgba(0, 255, 65, 0.1) 50%,
+                                        rgba(0, 255, 65, 0.1) 75%, transparent 75%);
+            background-size: 10px 10px;
+            opacity: 0.3;
+        }
+        
+        .featured-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+        
+        .featured-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--matrix-green);
+        }
+        
+        .featured-content p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 15px;
+            padding: 5px 12px;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--matrix-green);
+        }
+        
+        .breaking-news {
+            position: relative;
+        }
+        
+        .breaking-news::after {
+            content: "Flaş Haber";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            padding: 5px 25px;
+            font-size: 0.8rem;
+            transform: rotate(45deg);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .featured-image {
+                height: 200px;
+                border-right: none;
+                border-bottom: 1px solid var(--matrix-green);
+            }
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html" class="active">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-container">
+            <div class="page-header">
+                <h1 class="page-title">Tech&News</h1>
+                <p class="page-description">Teknoloji dünyasındaki son gelişmeler, haberler ve analizler...</p>
+            </div>
+
+            <div class="news-grid">
+                <!-- Haberler dinamik olarak JavaScript ile yüklenecek -->
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Load news immediately to prevent any flicker
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tech&News Functionality - Load immediately
+            loadTechNews();
+            
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            const adminLink = document.querySelector('.admin-link');
+            
+            if (isLoggedIn === 'true') {
+                // Add a logged in indicator to the admin link
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            } else {
+                // If not logged in, ensure admin link points to login page
+                adminLink.href = 'admin.html';
+            }
+            
+            // Force admin link to always check login status before navigation
+            adminLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Always prevent default navigation
+                
+                // Check login status
+                const currentLoginStatus = localStorage.getItem('matrixBlogLoggedIn');
+                
+                if (currentLoginStatus === 'true') {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    window.location.href = 'admin.html';
+                }
+            });
+        });
+        
+        function loadTechNews() {
+            console.log("Loading Tech&News content...");
+            
+            // Get news container
+            const newsGrid = document.querySelector('.news-grid');
+            
+            // Clear existing content (just in case)
+            newsGrid.innerHTML = '';
+            
+            // Get news from localStorage
+            let techNews = localStorage.getItem('matrixBlogTechNews');
+            techNews = techNews ? JSON.parse(techNews) : [];
+            
+            // Check if we have any news
+            if (techNews.length === 0) {
+                // No news, show placeholder message
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.style.gridColumn = '1 / -1';
+                emptyState.style.textAlign = 'center';
+                emptyState.style.padding = '50px 20px';
+                
+                emptyState.innerHTML = `
+                    <i class="fas fa-newspaper" style="font-size: 3rem; margin-bottom: 20px; color: var(--matrix-green);"></i>
+                    <p>Henüz hiç teknoloji haberi bulunmuyor. Admin panelinden teknoloji haberleri ekleyebilirsiniz.</p>
+                `;
+                
+                newsGrid.appendChild(emptyState);
+                return;
+            }
+            
+            // Sort news (newest first based on timestamp)
+            techNews.sort((a, b) => b.timestamp - a.timestamp);
+            
+            // First news item will be featured
+            if (techNews.length > 0) {
+                const featuredNews = techNews[0];
+                
+                // Format date
+                const featuredDate = new Date(featuredNews.date).toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Get category name
+                let categoryName = '';
+                switch(featuredNews.category) {
+                    case 'yapay-zeka': categoryName = 'Yapay Zeka'; break;
+                    case 'yazilim': categoryName = 'Yazılım'; break;
+                    case 'donanim': categoryName = 'Donanım'; break;
+                    case 'siber-guvenlik': categoryName = 'Siber Güvenlik'; break;
+                    case 'blockchain': categoryName = 'Blockchain & Kripto'; break;
+                    default: categoryName = 'Diğer';
+                }
+                
+                // Create featured article
+                const featuredArticle = document.createElement('article');
+                featuredArticle.className = 'featured-news';
+                
+                featuredArticle.innerHTML = `
+                    <div class="featured-image">${categoryName}</div>
+                    <div class="featured-content">
+                        <span class="category-tag">${categoryName}</span>
+                        <span class="category-tag">Teknoloji</span>
+                        <h3>${featuredNews.title}</h3>
+                        <div class="news-meta">
+                            <span><i class="far fa-calendar-alt"></i> ${featuredDate}</span>
+                            ${featuredNews.source ? `<span><i class="fas fa-link"></i> ${featuredNews.source}</span>` : ''}
+                        </div>
+                        <p>${featuredNews.content}</p>
+                        ${featuredNews.sourceURL ? `<a href="${featuredNews.sourceURL}" class="btn" target="_blank">Kaynağa Git</a>` : ''}
+                    </div>
+                `;
+                
+                newsGrid.appendChild(featuredArticle);
+            }
+            
+            // Display remaining news items
+            const remainingNews = techNews.slice(1);
+            
+            remainingNews.forEach(news => {
+                // Format date
+                const newsDate = new Date(news.date).toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Get category name and image text
+                let categoryName = '';
+                switch(news.category) {
+                    case 'yapay-zeka': categoryName = 'Yapay Zeka'; break;
+                    case 'yazilim': categoryName = 'Yazılım'; break;
+                    case 'donanim': categoryName = 'Donanım'; break;
+                    case 'siber-guvenlik': categoryName = 'Siber Güvenlik'; break;
+                    case 'blockchain': categoryName = 'Blockchain & Kripto'; break;
+                    default: categoryName = 'Diğer';
+                }
+                
+                // Create news card
+                const newsCard = document.createElement('article');
+                newsCard.className = 'news-card';
+                
+                newsCard.innerHTML = `
+                    <div class="news-image">${categoryName}</div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span><i class="far fa-calendar-alt"></i> ${newsDate}</span>
+                            ${news.source ? `<span><i class="fas fa-link"></i> ${news.source}</span>` : ''}
+                        </div>
+                        <h3>${news.title}</h3>
+                        <p>${news.content.length > 150 ? news.content.substring(0, 150) + '...' : news.content}</p>
+                        ${news.sourceURL ? `<a href="${news.sourceURL}" class="btn" target="_blank">Kaynağa Git</a>` : ''}
+                    </div>
+                `;
+                
+                newsGrid.appendChild(newsCard);
+            });
+        }
+    </script>
+</body>
+</html> 
+=======
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & News | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--matrix-green);
+            position: relative;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .content-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .news-card {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .news-image {
+            height: 180px;
+            background-color: var(--matrix-dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--matrix-green);
+            border-bottom: 1px solid var(--matrix-green);
+            font-size: 1.3rem;
+            font-weight: bold;
+            background-image: linear-gradient(to bottom right, rgba(0, 30, 0, 0.8), rgba(0, 60, 0, 0.4));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.1) 25%, transparent 25%,
+                                        transparent 50%, rgba(0, 255, 65, 0.1) 50%,
+                                        rgba(0, 255, 65, 0.1) 75%, transparent 75%);
+            background-size: 10px 10px;
+            opacity: 0.3;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--matrix-green);
+        }
+        
+        .news-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .featured-news {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .featured-news:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .featured-image {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--matrix-dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--matrix-green);
+            border-right: 1px solid var(--matrix-green);
+            font-size: 1.5rem;
+            font-weight: bold;
+            background-image: linear-gradient(to bottom right, rgba(0, 30, 0, 0.8), rgba(0, 60, 0, 0.4));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.1) 25%, transparent 25%,
+                                        transparent 50%, rgba(0, 255, 65, 0.1) 50%,
+                                        rgba(0, 255, 65, 0.1) 75%, transparent 75%);
+            background-size: 10px 10px;
+            opacity: 0.3;
+        }
+        
+        .featured-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+        
+        .featured-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--matrix-green);
+        }
+        
+        .featured-content p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 15px;
+            padding: 5px 12px;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--matrix-green);
+        }
+        
+        .breaking-news {
+            position: relative;
+        }
+        
+        .breaking-news::after {
+            content: "Flaş Haber";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            padding: 5px 25px;
+            font-size: 0.8rem;
+            transform: rotate(45deg);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .featured-image {
+                height: 200px;
+                border-right: none;
+                border-bottom: 1px solid var(--matrix-green);
+            }
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html" class="active">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-container">
+            <div class="page-header">
+                <h1 class="page-title">Tech&News</h1>
+                <p class="page-description">Teknoloji dünyasındaki son gelişmeler, haberler ve analizler...</p>
+            </div>
+
+            <div class="news-grid">
+                <!-- Haberler dinamik olarak JavaScript ile yüklenecek -->
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Load news immediately to prevent any flicker
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tech&News Functionality - Load immediately
+            loadTechNews();
+            
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            const adminLink = document.querySelector('.admin-link');
+            
+            if (isLoggedIn === 'true') {
+                // Add a logged in indicator to the admin link
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            } else {
+                // If not logged in, ensure admin link points to login page
+                adminLink.href = 'admin.html';
+            }
+            
+            // Force admin link to always check login status before navigation
+            adminLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Always prevent default navigation
+                
+                // Check login status
+                const currentLoginStatus = localStorage.getItem('matrixBlogLoggedIn');
+                
+                if (currentLoginStatus === 'true') {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    window.location.href = 'admin.html';
+                }
+            });
+        });
+        
+        function loadTechNews() {
+            console.log("Loading Tech&News content...");
+            
+            // Get news container
+            const newsGrid = document.querySelector('.news-grid');
+            
+            // Clear existing content (just in case)
+            newsGrid.innerHTML = '';
+            
+            // Get news from localStorage
+            let techNews = localStorage.getItem('matrixBlogTechNews');
+            techNews = techNews ? JSON.parse(techNews) : [];
+            
+            // Check if we have any news
+            if (techNews.length === 0) {
+                // No news, show placeholder message
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.style.gridColumn = '1 / -1';
+                emptyState.style.textAlign = 'center';
+                emptyState.style.padding = '50px 20px';
+                
+                emptyState.innerHTML = `
+                    <i class="fas fa-newspaper" style="font-size: 3rem; margin-bottom: 20px; color: var(--matrix-green);"></i>
+                    <p>Henüz hiç teknoloji haberi bulunmuyor. Admin panelinden teknoloji haberleri ekleyebilirsiniz.</p>
+                `;
+                
+                newsGrid.appendChild(emptyState);
+                return;
+            }
+            
+            // Sort news (newest first based on timestamp)
+            techNews.sort((a, b) => b.timestamp - a.timestamp);
+            
+            // First news item will be featured
+            if (techNews.length > 0) {
+                const featuredNews = techNews[0];
+                
+                // Format date
+                const featuredDate = new Date(featuredNews.date).toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Get category name
+                let categoryName = '';
+                switch(featuredNews.category) {
+                    case 'yapay-zeka': categoryName = 'Yapay Zeka'; break;
+                    case 'yazilim': categoryName = 'Yazılım'; break;
+                    case 'donanim': categoryName = 'Donanım'; break;
+                    case 'siber-guvenlik': categoryName = 'Siber Güvenlik'; break;
+                    case 'blockchain': categoryName = 'Blockchain & Kripto'; break;
+                    default: categoryName = 'Diğer';
+                }
+                
+                // Create featured article
+                const featuredArticle = document.createElement('article');
+                featuredArticle.className = 'featured-news';
+                
+                featuredArticle.innerHTML = `
+                    <div class="featured-image">${categoryName}</div>
+                    <div class="featured-content">
+                        <span class="category-tag">${categoryName}</span>
+                        <span class="category-tag">Teknoloji</span>
+                        <h3>${featuredNews.title}</h3>
+                        <div class="news-meta">
+                            <span><i class="far fa-calendar-alt"></i> ${featuredDate}</span>
+                            ${featuredNews.source ? `<span><i class="fas fa-link"></i> ${featuredNews.source}</span>` : ''}
+                        </div>
+                        <p>${featuredNews.content}</p>
+                        ${featuredNews.sourceURL ? `<a href="${featuredNews.sourceURL}" class="btn" target="_blank">Kaynağa Git</a>` : ''}
+                    </div>
+                `;
+                
+                newsGrid.appendChild(featuredArticle);
+            }
+            
+            // Display remaining news items
+            const remainingNews = techNews.slice(1);
+            
+            remainingNews.forEach(news => {
+                // Format date
+                const newsDate = new Date(news.date).toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Get category name and image text
+                let categoryName = '';
+                switch(news.category) {
+                    case 'yapay-zeka': categoryName = 'Yapay Zeka'; break;
+                    case 'yazilim': categoryName = 'Yazılım'; break;
+                    case 'donanim': categoryName = 'Donanım'; break;
+                    case 'siber-guvenlik': categoryName = 'Siber Güvenlik'; break;
+                    case 'blockchain': categoryName = 'Blockchain & Kripto'; break;
+                    default: categoryName = 'Diğer';
+                }
+                
+                // Create news card
+                const newsCard = document.createElement('article');
+                newsCard.className = 'news-card';
+                
+                newsCard.innerHTML = `
+                    <div class="news-image">${categoryName}</div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span><i class="far fa-calendar-alt"></i> ${newsDate}</span>
+                            ${news.source ? `<span><i class="fas fa-link"></i> ${news.source}</span>` : ''}
+                        </div>
+                        <h3>${news.title}</h3>
+                        <p>${news.content.length > 150 ? news.content.substring(0, 150) + '...' : news.content}</p>
+                        ${news.sourceURL ? `<a href="${news.sourceURL}" class="btn" target="_blank">Kaynağa Git</a>` : ''}
+                    </div>
+                `;
+                
+                newsGrid.appendChild(newsCard);
+            });
+        }
+    </script>
+</body>
+</html> 
+>>>>>>> d950db16e52c9307ff1028d52cc493241d316c75

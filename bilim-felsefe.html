@@ -1,0 +1,591 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilim & Felsefe | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--matrix-green);
+            position: relative;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .content-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .brain-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        #brainCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .brain-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        
+        .philosophy-grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .philosophy-card {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: auto;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .philosophy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .philosophy-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--matrix-green);
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .philosophy-card p {
+            line-height: 1.6;
+            flex-grow: 1;
+            overflow: visible;
+        }
+        
+        .philosophy-quote {
+            background-color: rgba(0, 10, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .philosophy-quote blockquote {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .philosophy-quote cite {
+            display: block;
+            text-align: right;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .additional-content {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--matrix-green);
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .content-section p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html" class="active">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-container">
+            <div class="page-header">
+                <h1 class="page-title">Bilim & Felsefe</h1>
+                <p class="page-description">Gerçekliğin doğasını sorgulayan ve varoluşumuzu anlamlandıran düşünceler...</p>
+            </div>
+            
+            <div id="brainContainer" class="brain-container">
+                <canvas id="brainCanvas"></canvas>
+                <div class="brain-content">
+                    <div class="philosophy-grid">
+                        <div class="philosophy-card">
+                            <h3>Dijital Gerçeklik</h3>
+                            <p>Algıladığımız gerçek, sinir sistemimizin yorumladığı elektrik sinyallerinden ibaret ise, dijital ekranlarda gördüğümüz gerçeklik de aynı prensibe dayanır. Peki, hangisi daha gerçek?</p>
+                        </div>
+                        <div class="philosophy-card">
+                            <h3>Bilinç ve Kodlama</h3>
+                            <p>İnsan bilinci bir algoritma mıdır? Yapay zeka, kendi bilincine sahip olabilir mi? Belki de bilincimiz, evrenin çalıştırdığı dev bir programın parçasıdır.</p>
+                        </div>
+                        <div class="philosophy-card">
+                            <h3>Kuantum Bilinç</h3>
+                            <p>Roger Penrose ve Stuart Hameroff'un kuantum bilinç teorisi, bilincin mikrotübüller içindeki kuantum olaylardan kaynaklandığını öne sürer. Beyin, evrenin en karmaşık kuantum bilgisayarı olabilir mi?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr style="margin: 30px auto; width: 80%; border: none; height: 1px; background: linear-gradient(to right, transparent, var(--matrix-green), transparent);">
+            
+            <section class="content-section">
+                <h2>Bilimsel Determinizm ve Özgür İrade</h2>
+                <p>Modern fizik, atomik ve subatomik seviyede dünyanın belirli yasalara göre çalıştığını gösteriyor. Kuantum mekaniği bile, belirsizlik ilkesiyle birlikte, istatistiksel olarak tahmin edilebilir. Peki bu durumda gerçekten özgür iradeye sahip miyiz? Yoksa özgür irade, Matrix'teki gibi, sadece kendimizi daha iyi hissetmemiz için yaratılmış bir yanılsama mı?</p>
+                <p>Laplace'ın Şeytanı düşünce deneyi, evrendeki tüm parçacıkların konumları ve momentumları bilinirse, evrenin geçmişi ve geleceği tam olarak hesaplanabilir der. Peki bu durumda seçimlerimiz gerçekten bizim mi, yoksa kozmik bir algoritmanın kaçınılmaz sonuçları mı?</p>
+            </section>
+            
+            <div class="additional-content">
+                <section class="content-section">
+                    <h2>Simülasyon Hipotezi</h2>
+                    <p>Filozof Nick Bostrom'un "Simülasyon Argümanı", teknolojik olarak gelişmiş bir uygarlığın, atalarının yaşamını simüle etmek için yeterli hesaplama gücüne sahip olabileceğini ve biz de böyle bir simülasyonda yaşıyor olabileceğimizi öne sürer. Matrix, bu felsefi düşüncenin popüler kültürdeki en başarılı örneklerinden biridir.</p>
+                    <p>Elon Musk'ın da savunduğu bu hipotez, gerçekliğimizin bir başka medeniyetin süper bilgisayarında çalışan bir program olma olasılığının oldukça yüksek olduğunu iddia eder. Peki bu durumda "gerçek" nedir ve ona nasıl ulaşabiliriz?</p>
+                </section>
+                
+                <section class="content-section">
+                    <h2>Kuantum Dünya Görüşü</h2>
+                    <p>Kuantum fiziği, atom altı parçacıkların klasik fizik kurallarına uymadığını gösteriyor. Süperpozisyon, dalga-parçacık ikiliği ve kuantum dolanıklık gibi fenomenler, gerçekliğin doğası hakkındaki anlayışımızı derinden sarsmaktadır.</p>
+                    <p>Kopenhag yorumu, Çoklu Dünyalar hipotezi ve Bohm mekaniği gibi farklı kuantum yorumları, gerçekliğin temelinde yatan farklı felsefi bakış açılarını temsil eder. Matrix'teki "gerçeklik" kavramı, kuantum fiziğindeki "gözlemci etkisi" ile paralellikler taşır: Bir şeyi gözlemlediğimizde, onu değiştiririz.</p>
+                </section>
+                
+                <section class="content-section">
+                    <h2>Bilinç ve Teknoloji</h2>
+                    <p>Günümüzde nörobilim ve yapay zeka araştırmaları, bilincin doğasını anlamaya çalışıyor. Bilinci tam olarak anlayabilir ve hatta yapay olarak oluşturabilir miyiz? Turing testi ve Çin Odası düşünce deneyi gibi felsefî sorgular, makinelerin gerçekten "düşünebilir" olup olmadığını tartışır.</p>
+                    <p>Matrix, insan bilincinin makinelere aktarılabilir olduğunu ve hatta dijital ortamlarda yaşayabileceğini öne sürer. Bu düşünce, transhumanizm ve zihin yükleme gibi fütüristik konseptlerle yakından ilişkilidir. İnsanlık, bir gün Neo gibi zihnini makinelere yükleyebilecek mi?</p>
+                </section>
+                
+                <section class="content-section">
+                    <h2>Dijital Özgürlük ve Kriptografik Direniş</h2>
+                    <p>1980'lerde ortaya çıkan Cyberpunk hareketi, yüksek teknoloji ve düşük yaşam standardı temasıyla distopik bir gelecek vizyonu sunarken, bireyin dijital alanda özgürlüğünü koruması fikrini ortaya koymuştur. William Gibson'ın "Neuromancer" ve Neal Stephenson'ın "Snow Crash" gibi eserler, bu hareketin temel taşları olmuştur.</p>
+                    <p>Cypherpunk hareketi ise 1990'larda kriptografi kullanarak dijital gizliliği ve özgürlüğü savunmaya başlamıştır. "Kod yasadır" felsefesi, teknolojik tasarımın politik bir eylem olduğunu vurgular. Bu hareketin en önemli ürünlerinden biri, 2009'da ortaya çıkan Bitcoin ve ardından gelen kripto para ekosistemidir.</p>
+                    <p>Kripto para hareketinin temelinde, merkezi otoritelerin kontrolünden bağımsız, eşler arası (peer-to-peer) değer transferi yapabilme özgürlüğü yatar. Blockchain teknolojisi, güven gerektirmeyen sistemler kurarak, aracıları ortadan kaldırmayı ve finansal özgürlüğü herkese açık hale getirmeyi amaçlar. Bu hareket, günümüzde merkeziyetsiz finans (DeFi), merkeziyetsiz otonom organizasyonlar (DAO) ve Web3 gibi yeni paradigmalarla genişlemeye devam etmektedir.</p>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Update admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            }
+        });
+        
+        // Remove brain outline completely
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('brainCanvas');
+            
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to match container
+            function setCanvasSize() {
+                const container = document.getElementById('brainContainer');
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            }
+            
+            setCanvasSize();
+            window.addEventListener('resize', setCanvasSize);
+            
+            // Clear canvas and apply a subtle background
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(0, 10, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Just clear the canvas without drawing any brain outline
+            clearCanvas();
+        });
+    </script>
+</body>
+</html> 
+=======
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilim & Felsefe | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--matrix-green);
+            position: relative;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .content-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .brain-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        #brainCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .brain-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        
+        .philosophy-grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .philosophy-card {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: auto;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .philosophy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .philosophy-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--matrix-green);
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .philosophy-card p {
+            line-height: 1.6;
+            flex-grow: 1;
+            overflow: visible;
+        }
+        
+        .philosophy-quote {
+            background-color: rgba(0, 10, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .philosophy-quote blockquote {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .philosophy-quote cite {
+            display: block;
+            text-align: right;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .additional-content {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--matrix-green);
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .content-section p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html" class="active">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-container">
+            <div class="page-header">
+                <h1 class="page-title">Bilim & Felsefe</h1>
+                <p class="page-description">Gerçekliğin doğasını sorgulayan ve varoluşumuzu anlamlandıran düşünceler...</p>
+            </div>
+            
+            <div id="brainContainer" class="brain-container">
+                <canvas id="brainCanvas"></canvas>
+                <div class="brain-content">
+                    <div class="philosophy-grid">
+                        <div class="philosophy-card">
+                            <h3>Dijital Gerçeklik</h3>
+                            <p>Algıladığımız gerçek, sinir sistemimizin yorumladığı elektrik sinyallerinden ibaret ise, dijital ekranlarda gördüğümüz gerçeklik de aynı prensibe dayanır. Peki, hangisi daha gerçek?</p>
+                        </div>
+                        <div class="philosophy-card">
+                            <h3>Bilinç ve Kodlama</h3>
+                            <p>İnsan bilinci bir algoritma mıdır? Yapay zeka, kendi bilincine sahip olabilir mi? Belki de bilincimiz, evrenin çalıştırdığı dev bir programın parçasıdır.</p>
+                        </div>
+                        <div class="philosophy-card">
+                            <h3>Kuantum Bilinç</h3>
+                            <p>Roger Penrose ve Stuart Hameroff'un kuantum bilinç teorisi, bilincin mikrotübüller içindeki kuantum olaylardan kaynaklandığını öne sürer. Beyin, evrenin en karmaşık kuantum bilgisayarı olabilir mi?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr style="margin: 30px auto; width: 80%; border: none; height: 1px; background: linear-gradient(to right, transparent, var(--matrix-green), transparent);">
+            
+            <section class="content-section">
+                <h2>Bilimsel Determinizm ve Özgür İrade</h2>
+                <p>Modern fizik, atomik ve subatomik seviyede dünyanın belirli yasalara göre çalıştığını gösteriyor. Kuantum mekaniği bile, belirsizlik ilkesiyle birlikte, istatistiksel olarak tahmin edilebilir. Peki bu durumda gerçekten özgür iradeye sahip miyiz? Yoksa özgür irade, Matrix'teki gibi, sadece kendimizi daha iyi hissetmemiz için yaratılmış bir yanılsama mı?</p>
+                <p>Laplace'ın Şeytanı düşünce deneyi, evrendeki tüm parçacıkların konumları ve momentumları bilinirse, evrenin geçmişi ve geleceği tam olarak hesaplanabilir der. Peki bu durumda seçimlerimiz gerçekten bizim mi, yoksa kozmik bir algoritmanın kaçınılmaz sonuçları mı?</p>
+            </section>
+            
+            <div class="additional-content">
+                <section class="content-section">
+                    <h2>Simülasyon Hipotezi</h2>
+                    <p>Filozof Nick Bostrom'un "Simülasyon Argümanı", teknolojik olarak gelişmiş bir uygarlığın, atalarının yaşamını simüle etmek için yeterli hesaplama gücüne sahip olabileceğini ve biz de böyle bir simülasyonda yaşıyor olabileceğimizi öne sürer. Matrix, bu felsefi düşüncenin popüler kültürdeki en başarılı örneklerinden biridir.</p>
+                    <p>Elon Musk'ın da savunduğu bu hipotez, gerçekliğimizin bir başka medeniyetin süper bilgisayarında çalışan bir program olma olasılığının oldukça yüksek olduğunu iddia eder. Peki bu durumda "gerçek" nedir ve ona nasıl ulaşabiliriz?</p>
+                </section>
+                
+                <section class="content-section">
+                    <h2>Kuantum Dünya Görüşü</h2>
+                    <p>Kuantum fiziği, atom altı parçacıkların klasik fizik kurallarına uymadığını gösteriyor. Süperpozisyon, dalga-parçacık ikiliği ve kuantum dolanıklık gibi fenomenler, gerçekliğin doğası hakkındaki anlayışımızı derinden sarsmaktadır.</p>
+                    <p>Kopenhag yorumu, Çoklu Dünyalar hipotezi ve Bohm mekaniği gibi farklı kuantum yorumları, gerçekliğin temelinde yatan farklı felsefi bakış açılarını temsil eder. Matrix'teki "gerçeklik" kavramı, kuantum fiziğindeki "gözlemci etkisi" ile paralellikler taşır: Bir şeyi gözlemlediğimizde, onu değiştiririz.</p>
+                </section>
+                
+                <section class="content-section">
+                    <h2>Bilinç ve Teknoloji</h2>
+                    <p>Günümüzde nörobilim ve yapay zeka araştırmaları, bilincin doğasını anlamaya çalışıyor. Bilinci tam olarak anlayabilir ve hatta yapay olarak oluşturabilir miyiz? Turing testi ve Çin Odası düşünce deneyi gibi felsefî sorgular, makinelerin gerçekten "düşünebilir" olup olmadığını tartışır.</p>
+                    <p>Matrix, insan bilincinin makinelere aktarılabilir olduğunu ve hatta dijital ortamlarda yaşayabileceğini öne sürer. Bu düşünce, transhumanizm ve zihin yükleme gibi fütüristik konseptlerle yakından ilişkilidir. İnsanlık, bir gün Neo gibi zihnini makinelere yükleyebilecek mi?</p>
+                </section>
+                
+                <section class="content-section">
+                    <h2>Dijital Özgürlük ve Kriptografik Direniş</h2>
+                    <p>1980'lerde ortaya çıkan Cyberpunk hareketi, yüksek teknoloji ve düşük yaşam standardı temasıyla distopik bir gelecek vizyonu sunarken, bireyin dijital alanda özgürlüğünü koruması fikrini ortaya koymuştur. William Gibson'ın "Neuromancer" ve Neal Stephenson'ın "Snow Crash" gibi eserler, bu hareketin temel taşları olmuştur.</p>
+                    <p>Cypherpunk hareketi ise 1990'larda kriptografi kullanarak dijital gizliliği ve özgürlüğü savunmaya başlamıştır. "Kod yasadır" felsefesi, teknolojik tasarımın politik bir eylem olduğunu vurgular. Bu hareketin en önemli ürünlerinden biri, 2009'da ortaya çıkan Bitcoin ve ardından gelen kripto para ekosistemidir.</p>
+                    <p>Kripto para hareketinin temelinde, merkezi otoritelerin kontrolünden bağımsız, eşler arası (peer-to-peer) değer transferi yapabilme özgürlüğü yatar. Blockchain teknolojisi, güven gerektirmeyen sistemler kurarak, aracıları ortadan kaldırmayı ve finansal özgürlüğü herkese açık hale getirmeyi amaçlar. Bu hareket, günümüzde merkeziyetsiz finans (DeFi), merkeziyetsiz otonom organizasyonlar (DAO) ve Web3 gibi yeni paradigmalarla genişlemeye devam etmektedir.</p>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Update admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            }
+        });
+        
+        // Remove brain outline completely
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('brainCanvas');
+            
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to match container
+            function setCanvasSize() {
+                const container = document.getElementById('brainContainer');
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            }
+            
+            setCanvasSize();
+            window.addEventListener('resize', setCanvasSize);
+            
+            // Clear canvas and apply a subtle background
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(0, 10, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Just clear the canvas without drawing any brain outline
+            clearCanvas();
+        });
+    </script>
+</body>
+</html> 
+>>>>>>> d950db16e52c9307ff1028d52cc493241d316c75

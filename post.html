@@ -1,0 +1,1484 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix'in Felsefi Arka Planı | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Post Page Styles */
+        .post-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .post-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--matrix-green);
+        }
+        
+        .post-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: var(--glow-shadow);
+            line-height: 1.3;
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .post-meta-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-meta-item i {
+            margin-right: 5px;
+        }
+        
+        .post-image {
+            height: 300px;
+            background-color: var(--matrix-dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--matrix-green);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            background-image: linear-gradient(to bottom right, rgba(0, 30, 0, 0.8), rgba(0, 60, 0, 0.4));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .post-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.1) 25%, transparent 25%,
+                                        transparent 50%, rgba(0, 255, 65, 0.1) 50%,
+                                        rgba(0, 255, 65, 0.1) 75%, transparent 75%);
+            background-size: 10px 10px;
+            opacity: 0.3;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .post-content p {
+            margin-bottom: 20px;
+        }
+        
+        .post-content h2 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            padding-bottom: 10px;
+            text-shadow: var(--glow-shadow);
+            color: var(--matrix-green);
+        }
+        
+        .post-content h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px;
+            text-shadow: var(--glow-shadow);
+            color: var(--matrix-green);
+        }
+        
+        /* Matrix özel stil sınıfları */
+        .matrix-glow {
+            color: var(--matrix-green);
+            font-weight: bold;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .matrix-heading {
+            color: var(--matrix-green);
+            font-weight: bold;
+            text-shadow: var(--glow-shadow);
+            margin: 20px 0 10px 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .post-content blockquote {
+            border-left: 3px solid var(--matrix-green);
+            padding: 15px 20px;
+            background-color: rgba(0, 255, 65, 0.05);
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .post-content ul, .post-content ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .post-content li {
+            margin-bottom: 10px;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .post-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .post-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .post-tag:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .social-share {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .share-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            transition: all 0.3s ease;
+        }
+        
+        .share-button:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            transform: translateY(-3px);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .comments-section {
+            margin-top: 50px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .comment {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .commenter {
+            display: flex;
+            align-items: center;
+        }
+        
+        .commenter-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--matrix-dark-green);
+            border: 1px solid var(--matrix-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .commenter-name {
+            font-weight: bold;
+        }
+        
+        .comment-date {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .comment-body {
+            line-height: 1.6;
+        }
+        
+        .comment-form {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(0, 20, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 4px;
+            color: var(--matrix-green);
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-submit:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+            padding-top: 20px;
+        }
+        
+        .post-navigation a {
+            display: flex;
+            align-items: center;
+            color: var(--matrix-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .post-navigation a:hover {
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .prev-post i {
+            margin-right: 8px;
+        }
+        
+        .next-post {
+            text-align: right;
+        }
+        
+        .next-post i {
+            margin-left: 8px;
+        }
+        
+        .edit-post-btn {
+            display: none;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: var(--matrix-dark-green);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .edit-post-btn:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 2rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
+            
+            .post-actions {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="post-container">
+            <button id="editPostBtn" class="edit-post-btn">
+                <i class="fas fa-edit"></i> Yazıyı Düzenle
+            </button>
+            
+            <article class="post">
+                <header class="post-header">
+                    <h1 class="post-title" id="postTitle">Matrix Filminin Felsefi Arka Planı</h1>
+                    <div class="post-meta">
+                        <div class="post-meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span id="postDate">15 Şubat 2024</span>
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="far fa-user"></i>
+                            <span id="postAuthor">Çağlar</span>
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="far fa-folder"></i>
+                            <span id="postCategory">Felsefe</span>
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="far fa-comment"></i>
+                            <span id="commentCount">0 Yorum</span>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="post-image" id="postImage">Blog Görsel</div>
+                
+                <div class="post-content" id="postContent">
+                    <h2>Matrix Filminin Felsefi Arka Planı</h2>
+                    <p>Matrix filmi, felsefe dünyasında derin yansımalar uyandıran, varoluşsal sorgulamaları sinema diliyle anlatan çığır açıcı bir yapımdır.</p>
+                    
+                    <p>Film, Platon'un mağara alegorisi, Descartes'ın şüpheciliği ve Berkeley'in idealizmi gibi felsefi kavramları modern bir anlatımla ele alır. 
+                    Bu yazıda, filmin felsefi temellerini ve günümüz dünyasıyla ilişkisini inceleyeceğiz.</p>
+                    
+                    <h3>Gerçeklik Sorgulaması</h3>
+                    <p>Matrix'in ana teması, gerçeklik algımızın sorgulanmasıdır. Neo'nun "gerçek dünya" sandığı şeyin aslında bir simülasyon olduğunu öğrenmesi, 
+                    "gerçeklik nedir?" sorusunu akıllara getirir. Bu sorgulama, Descartes'ın <span class="matrix-glow">"Cogito, ergo sum"</span> (Düşünüyorum, o halde varım) 
+                    önermesine benzer şekilde, kendi bilincimizin varlığının tek kesin gerçeklik olabileceğini ima eder.</p>
+                    
+                    <!-- Statik olarak eklemek istediğiniz blog yazısının devamını buraya ekleyin -->
+                </div>
+                
+                <div class="post-actions">
+                    <div class="post-tags" id="postTags">
+                        <!-- Etiketler -->
+                        <a href="blog.html?tag=Matrix" class="post-tag">Matrix</a>
+                        <a href="blog.html?tag=Felsefe" class="post-tag">Felsefe</a>
+                        <a href="blog.html?tag=Gerçeklik" class="post-tag">Gerçeklik</a>
+                        <a href="blog.html?tag=Simülasyon" class="post-tag">Simülasyon</a>
+                    </div>
+                    
+                    <div class="social-share">
+                        <a href="#" class="share-button"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="share-button"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-button"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="share-button"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="post-navigation" id="postNavigation">
+                    <!-- Post navigasyon bağlantıları dinamik olarak eklenecek -->
+                </div>
+            </article>
+            
+            <section class="comments-section">
+                <h2 class="section-title" id="commentsTitle">Yorumlar (0)</h2>
+                
+                <div class="comments" id="commentsList">
+                    <!-- Yorumlar buraya dinamik olarak eklenecek -->
+                    <p id="noCommentsMessage" style="font-style: italic; opacity: 0.7;">Bu yazı için henüz yorum bulunmamaktadır.</p>
+                </div>
+                
+                <div class="comment-form">
+                    <h3>Yorum Yap</h3>
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <label for="name">İsim</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-posta</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Yorumunuz</label>
+                            <textarea id="comment" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Yorum Gönder</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Show edit post button
+                document.getElementById('editPostBtn').style.display = 'block';
+                
+                // Update admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            }
+            
+            // Edit post button click event
+            document.getElementById('editPostBtn').addEventListener('click', function() {
+                // Get post ID from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const postId = urlParams.get('id');
+                
+                if (!postId) {
+                    alert('Yazı ID bulunamadı. Düzenleme yapılamıyor.');
+                    return;
+                }
+                
+                // Redirect to admin dashboard with post id in URL for editing
+                window.location.href = 'admin-dashboard.html?edit=' + postId;
+            });
+            
+            // Load the blog post content from localStorage
+            loadBlogPost();
+            
+            // Comment form submission
+            document.getElementById('commentForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const commentText = document.getElementById('comment').value.trim();
+                
+                if (name && email && commentText) {
+                    // Create new comment object
+                    const newComment = {
+                        id: Date.now().toString(),
+                        name: name,
+                        email: email,
+                        text: commentText,
+                        date: new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
+                    };
+                    
+                    // Get post ID from URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    let postId = urlParams.get('id');
+                    
+                    // If no post ID in URL, use the first post
+                    if (!postId) {
+                        const blogPosts = JSON.parse(localStorage.getItem('matrixBlogPosts') || '[]');
+                        if (blogPosts.length > 0) {
+                            postId = blogPosts[0].id;
+                        }
+                    }
+                    
+                    // Get existing comments or create empty array
+                    let comments = JSON.parse(localStorage.getItem('blogComments') || '{}');
+                    if (!comments[postId]) {
+                        comments[postId] = [];
+                    }
+                    
+                    // Add new comment
+                    comments[postId].push(newComment);
+                    
+                    // Save comments to localStorage
+                    localStorage.setItem('blogComments', JSON.stringify(comments));
+                    
+                    // Reset form
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('comment').value = '';
+                    
+                    // Reload comments to show the new one
+                    loadComments(postId);
+                    
+                    alert('Yorumunuz başarıyla eklendi!');
+                }
+            });
+        });
+        
+        // Load blog post content
+        function loadBlogPost() {
+            // Get post ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let postId = urlParams.get('id');
+            
+            // Get blog posts from localStorage
+            const blogPosts = JSON.parse(localStorage.getItem('matrixBlogPosts') || '[]');
+            
+            if (blogPosts.length === 0) {
+                // If no posts available, display message
+                document.getElementById('postTitle').textContent = 'Henüz Blog Yazısı Bulunmamaktadır';
+                document.getElementById('postContent').innerHTML = '<p>Henüz hiç blog yazısı eklenmemiştir. Daha sonra tekrar kontrol ediniz.</p>';
+                return;
+            }
+            
+            // If no post ID specified or invalid ID, use the first post
+            let post;
+            if (!postId) {
+                post = blogPosts[0];
+            } else {
+                post = blogPosts.find(p => p.id === postId);
+                if (!post) {
+                    post = blogPosts[0];
+                }
+            }
+            
+            // Update post content
+            document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postDate').textContent = post.date;
+            document.getElementById('postAuthor').textContent = post.author || 'Çağlar';
+            document.getElementById('postCategory').textContent = post.category || 'Genel';
+            document.getElementById('postImage').textContent = post.title;
+            document.getElementById('postContent').innerHTML = post.content;
+            
+            // Update page title
+            document.title = `${post.title} | Kişisel Blog`;
+            
+            // Update tags
+            const tagsContainer = document.getElementById('postTags');
+            tagsContainer.innerHTML = '';
+            
+            if (post.tags && post.tags.length > 0) {
+                post.tags.forEach(tag => {
+                    const tagElement = document.createElement('a');
+                    tagElement.href = `blog.html?tag=${tag}`;
+                    tagElement.className = 'post-tag';
+                    tagElement.textContent = tag;
+                    tagsContainer.appendChild(tagElement);
+                });
+            }
+            
+            // Update navigation
+            updatePostNavigation(post.id, blogPosts);
+            
+            // Load comments
+            loadComments(post.id);
+        }
+        
+        // Load comments for a post
+        function loadComments(postId) {
+            const commentsList = document.getElementById('commentsList');
+            const commentsTitle = document.getElementById('commentsTitle');
+            const noCommentsMessage = document.getElementById('noCommentsMessage');
+            
+            // Get comments from localStorage
+            const comments = JSON.parse(localStorage.getItem('blogComments') || '{}');
+            const postComments = comments[postId] || [];
+            
+            // Update comments count
+            commentsTitle.textContent = `Yorumlar (${postComments.length})`;
+            document.getElementById('commentCount').textContent = `${postComments.length} Yorum`;
+            
+            // Clear existing comments
+            commentsList.innerHTML = '';
+            
+            if (postComments.length === 0) {
+                // Show no comments message
+                commentsList.appendChild(noCommentsMessage);
+                return;
+            }
+            
+            // Sort comments by date (newest first)
+            postComments.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Add comments to the page
+            postComments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.innerHTML = `
+                    <div class="comment-header">
+                        <div class="commenter">
+                            <div class="commenter-avatar">${comment.name.charAt(0)}</div>
+                            <div class="commenter-info">
+                                <div class="commenter-name">${comment.name}</div>
+                            </div>
+                        </div>
+                        <div class="comment-date">${comment.date}</div>
+                    </div>
+                    <div class="comment-body">
+                        <p>${comment.text}</p>
+                    </div>
+                `;
+                
+                commentsList.appendChild(commentElement);
+            });
+        }
+        
+        // Update post navigation
+        function updatePostNavigation(currentPostId, posts) {
+            const navigationContainer = document.getElementById('postNavigation');
+            
+            // Sort posts by timestamp or date
+            posts.sort((a, b) => {
+                if (a.timestamp && b.timestamp) {
+                    return b.timestamp - a.timestamp;
+                }
+                return new Date(b.date) - new Date(a.date);
+            });
+            
+            // Find current post index
+            const currentIndex = posts.findIndex(post => post.id === currentPostId);
+            
+            // Clear navigation container
+            navigationContainer.innerHTML = '';
+            
+            // Add previous post link if available
+            if (currentIndex < posts.length - 1) {
+                const prevPost = posts[currentIndex + 1];
+                const prevLink = document.createElement('a');
+                prevLink.href = `post.html?id=${prevPost.id}`;
+                prevLink.className = 'prev-post';
+                prevLink.innerHTML = `<i class="fas fa-arrow-left"></i> ${prevPost.title}`;
+                navigationContainer.appendChild(prevLink);
+            }
+            
+            // Add next post link if available
+            if (currentIndex > 0) {
+                const nextPost = posts[currentIndex - 1];
+                const nextLink = document.createElement('a');
+                nextLink.href = `post.html?id=${nextPost.id}`;
+                nextLink.className = 'next-post';
+                nextLink.innerHTML = `${nextPost.title} <i class="fas fa-arrow-right"></i>`;
+                navigationContainer.appendChild(nextLink);
+            }
+        }
+    </script>
+</body>
+</html> 
+=======
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix'in Felsefi Arka Planı | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Post Page Styles */
+        .post-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .post-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--matrix-green);
+        }
+        
+        .post-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: var(--glow-shadow);
+            line-height: 1.3;
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .post-meta-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-meta-item i {
+            margin-right: 5px;
+        }
+        
+        .post-image {
+            height: 300px;
+            background-color: var(--matrix-dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--matrix-green);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            background-image: linear-gradient(to bottom right, rgba(0, 30, 0, 0.8), rgba(0, 60, 0, 0.4));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .post-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.1) 25%, transparent 25%,
+                                        transparent 50%, rgba(0, 255, 65, 0.1) 50%,
+                                        rgba(0, 255, 65, 0.1) 75%, transparent 75%);
+            background-size: 10px 10px;
+            opacity: 0.3;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .post-content p {
+            margin-bottom: 20px;
+        }
+        
+        .post-content h2 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            padding-bottom: 10px;
+            text-shadow: var(--glow-shadow);
+            color: var(--matrix-green);
+        }
+        
+        .post-content h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px;
+            text-shadow: var(--glow-shadow);
+            color: var(--matrix-green);
+        }
+        
+        /* Matrix özel stil sınıfları */
+        .matrix-glow {
+            color: var(--matrix-green);
+            font-weight: bold;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .matrix-heading {
+            color: var(--matrix-green);
+            font-weight: bold;
+            text-shadow: var(--glow-shadow);
+            margin: 20px 0 10px 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .post-content blockquote {
+            border-left: 3px solid var(--matrix-green);
+            padding: 15px 20px;
+            background-color: rgba(0, 255, 65, 0.05);
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .post-content ul, .post-content ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .post-content li {
+            margin-bottom: 10px;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .post-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .post-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .post-tag:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .social-share {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .share-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            transition: all 0.3s ease;
+        }
+        
+        .share-button:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            transform: translateY(-3px);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .comments-section {
+            margin-top: 50px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .comment {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .commenter {
+            display: flex;
+            align-items: center;
+        }
+        
+        .commenter-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--matrix-dark-green);
+            border: 1px solid var(--matrix-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .commenter-name {
+            font-weight: bold;
+        }
+        
+        .comment-date {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .comment-body {
+            line-height: 1.6;
+        }
+        
+        .comment-form {
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(0, 20, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 4px;
+            color: var(--matrix-green);
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-submit:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+            padding-top: 20px;
+        }
+        
+        .post-navigation a {
+            display: flex;
+            align-items: center;
+            color: var(--matrix-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .post-navigation a:hover {
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .prev-post i {
+            margin-right: 8px;
+        }
+        
+        .next-post {
+            text-align: right;
+        }
+        
+        .next-post i {
+            margin-left: 8px;
+        }
+        
+        .edit-post-btn {
+            display: none;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: var(--matrix-dark-green);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .edit-post-btn:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 2rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
+            
+            .post-actions {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="post-container">
+            <button id="editPostBtn" class="edit-post-btn">
+                <i class="fas fa-edit"></i> Yazıyı Düzenle
+            </button>
+            
+            <article class="post">
+                <header class="post-header">
+                    <h1 class="post-title" id="postTitle">Blog Yazısı</h1>
+                    <div class="post-meta">
+                        <div class="post-meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span id="postDate">Tarih</span>
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="far fa-user"></i>
+                            <span id="postAuthor">Yazar</span>
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="far fa-folder"></i>
+                            <span id="postCategory">Kategori</span>
+                        </div>
+                        <div class="post-meta-item">
+                            <i class="far fa-comment"></i>
+                            <span id="commentCount">0 Yorum</span>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="post-image" id="postImage">Blog Görsel</div>
+                
+                <div class="post-content" id="postContent">
+                    <p>İçerik burada görüntülenecektir.</p>
+                </div>
+                
+                <div class="post-actions">
+                    <div class="post-tags" id="postTags">
+                        <!-- Etiketler buraya dinamik olarak eklenecek -->
+                    </div>
+                    
+                    <div class="social-share">
+                        <a href="#" class="share-button"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="share-button"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-button"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="share-button"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="post-navigation" id="postNavigation">
+                    <!-- Post navigasyon bağlantıları dinamik olarak eklenecek -->
+                </div>
+            </article>
+            
+            <section class="comments-section">
+                <h2 class="section-title" id="commentsTitle">Yorumlar (0)</h2>
+                
+                <div class="comments" id="commentsList">
+                    <!-- Yorumlar buraya dinamik olarak eklenecek -->
+                    <p id="noCommentsMessage" style="font-style: italic; opacity: 0.7;">Bu yazı için henüz yorum bulunmamaktadır.</p>
+                </div>
+                
+                <div class="comment-form">
+                    <h3>Yorum Yap</h3>
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <label for="name">İsim</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-posta</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Yorumunuz</label>
+                            <textarea id="comment" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Yorum Gönder</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Show edit post button
+                document.getElementById('editPostBtn').style.display = 'block';
+                
+                // Update admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            }
+            
+            // Edit post button click event
+            document.getElementById('editPostBtn').addEventListener('click', function() {
+                // Get post ID from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const postId = urlParams.get('id');
+                
+                if (!postId) {
+                    alert('Yazı ID bulunamadı. Düzenleme yapılamıyor.');
+                    return;
+                }
+                
+                // Redirect to admin dashboard with post id in URL for editing
+                window.location.href = 'admin-dashboard.html?edit=' + postId;
+            });
+            
+            // Load the blog post content from localStorage
+            loadBlogPost();
+            
+            // Comment form submission
+            document.getElementById('commentForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const commentText = document.getElementById('comment').value.trim();
+                
+                if (name && email && commentText) {
+                    // Create new comment object
+                    const newComment = {
+                        id: Date.now().toString(),
+                        name: name,
+                        email: email,
+                        text: commentText,
+                        date: new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
+                    };
+                    
+                    // Get post ID from URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    let postId = urlParams.get('id');
+                    
+                    // If no post ID in URL, use the first post
+                    if (!postId) {
+                        const blogPosts = JSON.parse(localStorage.getItem('matrixBlogPosts') || '[]');
+                        if (blogPosts.length > 0) {
+                            postId = blogPosts[0].id;
+                        }
+                    }
+                    
+                    // Get existing comments or create empty array
+                    let comments = JSON.parse(localStorage.getItem('blogComments') || '{}');
+                    if (!comments[postId]) {
+                        comments[postId] = [];
+                    }
+                    
+                    // Add new comment
+                    comments[postId].push(newComment);
+                    
+                    // Save comments to localStorage
+                    localStorage.setItem('blogComments', JSON.stringify(comments));
+                    
+                    // Reset form
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('comment').value = '';
+                    
+                    // Reload comments to show the new one
+                    loadComments(postId);
+                    
+                    alert('Yorumunuz başarıyla eklendi!');
+                }
+            });
+        });
+        
+        // Load blog post content
+        function loadBlogPost() {
+            // Get post ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let postId = urlParams.get('id');
+            
+            // Get blog posts from localStorage
+            const blogPosts = JSON.parse(localStorage.getItem('matrixBlogPosts') || '[]');
+            
+            if (blogPosts.length === 0) {
+                // If no posts available, display message
+                document.getElementById('postTitle').textContent = 'Henüz Blog Yazısı Bulunmamaktadır';
+                document.getElementById('postContent').innerHTML = '<p>Henüz hiç blog yazısı eklenmemiştir. Daha sonra tekrar kontrol ediniz.</p>';
+                return;
+            }
+            
+            // If no post ID specified or invalid ID, use the first post
+            let post;
+            if (!postId) {
+                post = blogPosts[0];
+            } else {
+                post = blogPosts.find(p => p.id === postId);
+                if (!post) {
+                    post = blogPosts[0];
+                }
+            }
+            
+            // Update post content
+            document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postDate').textContent = post.date;
+            document.getElementById('postAuthor').textContent = post.author || 'Çağlar';
+            document.getElementById('postCategory').textContent = post.category || 'Genel';
+            document.getElementById('postImage').textContent = post.title;
+            document.getElementById('postContent').innerHTML = post.content;
+            
+            // Update page title
+            document.title = `${post.title} | Kişisel Blog`;
+            
+            // Update tags
+            const tagsContainer = document.getElementById('postTags');
+            tagsContainer.innerHTML = '';
+            
+            if (post.tags && post.tags.length > 0) {
+                post.tags.forEach(tag => {
+                    const tagElement = document.createElement('a');
+                    tagElement.href = `blog.html?tag=${tag}`;
+                    tagElement.className = 'post-tag';
+                    tagElement.textContent = tag;
+                    tagsContainer.appendChild(tagElement);
+                });
+            }
+            
+            // Update navigation
+            updatePostNavigation(post.id, blogPosts);
+            
+            // Load comments
+            loadComments(post.id);
+        }
+        
+        // Load comments for a post
+        function loadComments(postId) {
+            const commentsList = document.getElementById('commentsList');
+            const commentsTitle = document.getElementById('commentsTitle');
+            const noCommentsMessage = document.getElementById('noCommentsMessage');
+            
+            // Get comments from localStorage
+            const comments = JSON.parse(localStorage.getItem('blogComments') || '{}');
+            const postComments = comments[postId] || [];
+            
+            // Update comments count
+            commentsTitle.textContent = `Yorumlar (${postComments.length})`;
+            document.getElementById('commentCount').textContent = `${postComments.length} Yorum`;
+            
+            // Clear existing comments
+            commentsList.innerHTML = '';
+            
+            if (postComments.length === 0) {
+                // Show no comments message
+                commentsList.appendChild(noCommentsMessage);
+                return;
+            }
+            
+            // Sort comments by date (newest first)
+            postComments.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Add comments to the page
+            postComments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.innerHTML = `
+                    <div class="comment-header">
+                        <div class="commenter">
+                            <div class="commenter-avatar">${comment.name.charAt(0)}</div>
+                            <div class="commenter-info">
+                                <div class="commenter-name">${comment.name}</div>
+                            </div>
+                        </div>
+                        <div class="comment-date">${comment.date}</div>
+                    </div>
+                    <div class="comment-body">
+                        <p>${comment.text}</p>
+                    </div>
+                `;
+                
+                commentsList.appendChild(commentElement);
+            });
+        }
+        
+        // Update post navigation
+        function updatePostNavigation(currentPostId, posts) {
+            const navigationContainer = document.getElementById('postNavigation');
+            
+            // Sort posts by timestamp or date
+            posts.sort((a, b) => {
+                if (a.timestamp && b.timestamp) {
+                    return b.timestamp - a.timestamp;
+                }
+                return new Date(b.date) - new Date(a.date);
+            });
+            
+            // Find current post index
+            const currentIndex = posts.findIndex(post => post.id === currentPostId);
+            
+            // Clear navigation container
+            navigationContainer.innerHTML = '';
+            
+            // Add previous post link if available
+            if (currentIndex < posts.length - 1) {
+                const prevPost = posts[currentIndex + 1];
+                const prevLink = document.createElement('a');
+                prevLink.href = `post.html?id=${prevPost.id}`;
+                prevLink.className = 'prev-post';
+                prevLink.innerHTML = `<i class="fas fa-arrow-left"></i> ${prevPost.title}`;
+                navigationContainer.appendChild(prevLink);
+            }
+            
+            // Add next post link if available
+            if (currentIndex > 0) {
+                const nextPost = posts[currentIndex - 1];
+                const nextLink = document.createElement('a');
+                nextLink.href = `post.html?id=${nextPost.id}`;
+                nextLink.className = 'next-post';
+                nextLink.innerHTML = `${nextPost.title} <i class="fas fa-arrow-right"></i>`;
+                navigationContainer.appendChild(nextLink);
+            }
+        }
+    </script>
+</body>
+</html> 
+>>>>>>> d950db16e52c9307ff1028d52cc493241d316c75

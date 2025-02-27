@@ -1,0 +1,1041 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--matrix-green);
+            position: relative;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .content-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(0, 255, 65, 0.3);
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--matrix-green);
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-item p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(0, 20, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 4px;
+            color: var(--matrix-green);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-submit:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .contact-map {
+            margin-top: 50px;
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 20, 0, 0.2);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 450px;
+            border: none;
+            filter: grayscale(90%) invert(92%) hue-rotate(80deg);
+        }
+        
+        .contact-info-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--matrix-green);
+            border-bottom: 1px solid var(--matrix-green);
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .contact-info-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .contact-quote {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+            }
+            to {
+                box-shadow: 0 0 15px rgba(0, 255, 65, 0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html" class="active">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-container">
+            <div class="page-header">
+                <h1 class="page-title">İletişim</h1>
+                <p class="page-description">Matrix'in ötesinde bir bağlantı kuralım. Sorularınız veya iş birlikleriniz için benimle iletişime geçin.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 class="contact-info-title">İletişim Bilgileri</h2>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>caglar@example.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>+90 123 456 7890</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>İstanbul, Türkiye</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" title="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="contact-quote">
+                        <p>"Ben sadece kapıyı gösterebilirim. İçeri girmek senin tercihin." — Morpheus</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2 class="contact-info-title">Mesaj Gönder</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="contactName" placeholder="İsim" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" placeholder="E-posta" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="contactSubject" placeholder="Konu">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contactMessage" placeholder="Mesajınız" required></textarea>
+                        </div>
+                        <button type="submit" id="submitContactForm" class="btn-submit">Gönder</button>
+                    </form>
+                    <div id="messageSent" style="display: none; margin-top: 20px; padding: 15px; background-color: rgba(0, 100, 0, 0.2); border: 1px solid var(--matrix-green); color: var(--matrix-green); border-radius: 4px; text-align: center; animation: glow 1.5s infinite alternate;">
+                        <p><i class="fas fa-check-circle"></i> Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapılacaktır.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-map">
+                <div class="map-overlay"></div>
+                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385398.5897809314!2d28.731984847996115!3d41.00498227625235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1623012335654!5m2!1str!2str" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Update admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            }
+            
+            // Load contact info from localStorage if available
+            const savedContactInfo = localStorage.getItem('matrixBlogContactInfo');
+            if (savedContactInfo) {
+                const contactInfo = JSON.parse(savedContactInfo);
+                
+                // Update contact information
+                const contactItems = document.querySelectorAll('.contact-item');
+                
+                // Update email
+                if (contactInfo.email && contactItems[0]) {
+                    contactItems[0].querySelector('p').textContent = contactInfo.email;
+                }
+                
+                // Update phone
+                if (contactInfo.phone && contactItems[1]) {
+                    contactItems[1].querySelector('p').textContent = contactInfo.phone;
+                }
+                
+                // Update location
+                if (contactInfo.location && contactItems[2]) {
+                    contactItems[2].querySelector('p').textContent = contactInfo.location;
+                }
+                
+                // Update social media links
+                const socialLinks = document.querySelectorAll('.social-link');
+                
+                // GitHub
+                if (contactInfo.github && socialLinks[0]) {
+                    socialLinks[0].href = `https://github.com/${contactInfo.github}`;
+                    socialLinks[0].target = "_blank";
+                    socialLinks[0].rel = "noopener noreferrer";
+                }
+                
+                // LinkedIn
+                if (contactInfo.linkedin && socialLinks[1]) {
+                    socialLinks[1].href = `https://linkedin.com/in/${contactInfo.linkedin}`;
+                    socialLinks[1].target = "_blank";
+                    socialLinks[1].rel = "noopener noreferrer";
+                }
+                
+                // Twitter
+                if (contactInfo.twitter && socialLinks[2]) {
+                    socialLinks[2].href = `https://twitter.com/${contactInfo.twitter}`;
+                    socialLinks[2].target = "_blank";
+                    socialLinks[2].rel = "noopener noreferrer";
+                }
+                
+                // Instagram
+                if (contactInfo.instagram && socialLinks[3]) {
+                    socialLinks[3].href = `https://instagram.com/${contactInfo.instagram}`;
+                    socialLinks[3].target = "_blank";
+                    socialLinks[3].rel = "noopener noreferrer";
+                }
+                
+                // Update page title with name
+                if (contactInfo.name) {
+                    // Update page title
+                    const pageTitle = document.querySelector('.page-title');
+                    if (pageTitle) {
+                        pageTitle.textContent = `İletişim - ${contactInfo.name}`;
+                    }
+                    
+                    // Update document title
+                    document.title = `İletişim | ${contactInfo.name}`;
+                    
+                    // Update footer copyright
+                    const footerCopyright = document.querySelector('footer p:last-child');
+                    if (footerCopyright) {
+                        footerCopyright.textContent = `© 2024 Kişisel Blog - ${contactInfo.name}. Tüm Hakları Saklıdır.`;
+                    }
+                }
+                
+                // Update bio if available
+                if (contactInfo.bio) {
+                    const contactQuote = document.querySelector('.contact-quote p');
+                    if (contactQuote) {
+                        contactQuote.textContent = `"${contactInfo.bio}"`;
+                    }
+                }
+            }
+            
+            // Update site name from settings if available
+            const savedSettings = localStorage.getItem('matrixBlogSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                if (settings.siteName) {
+                    document.querySelector('.logo').textContent = settings.siteName.split(' | ')[0];
+                }
+            }
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            const messageSent = document.getElementById('messageSent');
+            const submitButton = document.getElementById('submitContactForm');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    try {
+                        // Disable submit button to prevent multiple submissions
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Gönderiliyor...';
+                        
+                        // Get form data
+                        const name = document.getElementById('contactName').value.trim();
+                        const email = document.getElementById('contactEmail').value.trim();
+                        const subject = document.getElementById('contactSubject').value.trim() || 'İletişim Formu Mesajı';
+                        const message = document.getElementById('contactMessage').value.trim();
+                        const date = new Date().toLocaleString('tr-TR');
+                        
+                        // Create message object
+                        const newMessage = {
+                            id: Date.now(),
+                            name,
+                            email,
+                            subject,
+                            message,
+                            date,
+                            read: false
+                        };
+                        
+                        // Get existing messages or create empty array
+                        let messages = localStorage.getItem('matrixBlogMessages');
+                        if (messages) {
+                            messages = JSON.parse(messages);
+                        } else {
+                            messages = [];
+                        }
+                        
+                        // Add new message to array
+                        messages.unshift(newMessage);
+                        
+                        // Save to localStorage
+                        localStorage.setItem('matrixBlogMessages', JSON.stringify(messages));
+                        
+                        // Show success message
+                        contactForm.reset();
+                        messageSent.innerHTML = '<p><i class="fas fa-check-circle"></i> <strong>Mesajınız başarıyla gönderildi!</strong> Mesajınız admin paneline kaydedilmiştir. En kısa sürede size dönüş yapılacaktır.</p>';
+                        messageSent.style.display = 'block';
+                        
+                        // Re-enable submit button
+                        setTimeout(() => {
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Gönder';
+                        }, 2000);
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            messageSent.style.display = 'none';
+                        }, 5000);
+                    } catch (error) {
+                        // Handle any potential errors
+                        console.error('Form submission error:', error);
+                        messageSent.innerHTML = '<p><i class="fas fa-exclamation-circle"></i> <strong>Mesajınız gönderilirken bir hata oluştu.</strong> Lütfen tekrar deneyiniz.</p>';
+                        messageSent.style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+                        messageSent.style.borderColor = '#ff5f56';
+                        messageSent.style.display = 'block';
+                        
+                        // Re-enable submit button
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Gönder';
+                        
+                        // Hide error message after 5 seconds
+                        setTimeout(() => {
+                            messageSent.style.display = 'none';
+                            messageSent.style.backgroundColor = 'rgba(0, 100, 0, 0.2)';
+                            messageSent.style.borderColor = 'var(--matrix-green)';
+                        }, 5000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
+=======
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--matrix-green);
+            position: relative;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .content-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(0, 255, 65, 0.3);
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--matrix-green);
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-item p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(0, 20, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 4px;
+            color: var(--matrix-green);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-submit:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .contact-map {
+            margin-top: 50px;
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 20, 0, 0.2);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 450px;
+            border: none;
+            filter: grayscale(90%) invert(92%) hue-rotate(80deg);
+        }
+        
+        .contact-info-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--matrix-green);
+            border-bottom: 1px solid var(--matrix-green);
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .contact-info-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: var(--matrix-green);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .contact-quote {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+        
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+            }
+            to {
+                box-shadow: 0 0 15px rgba(0, 255, 65, 0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html" class="active">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-container">
+            <div class="page-header">
+                <h1 class="page-title">İletişim</h1>
+                <p class="page-description">Matrix'in ötesinde bir bağlantı kuralım. Sorularınız veya iş birlikleriniz için benimle iletişime geçin.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 class="contact-info-title">İletişim Bilgileri</h2>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>caglar@example.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>+90 123 456 7890</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>İstanbul, Türkiye</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" title="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="contact-quote">
+                        <p>"Ben sadece kapıyı gösterebilirim. İçeri girmek senin tercihin." — Morpheus</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2 class="contact-info-title">Mesaj Gönder</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="contactName" placeholder="İsim" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" placeholder="E-posta" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="contactSubject" placeholder="Konu">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contactMessage" placeholder="Mesajınız" required></textarea>
+                        </div>
+                        <button type="submit" id="submitContactForm" class="btn-submit">Gönder</button>
+                    </form>
+                    <div id="messageSent" style="display: none; margin-top: 20px; padding: 15px; background-color: rgba(0, 100, 0, 0.2); border: 1px solid var(--matrix-green); color: var(--matrix-green); border-radius: 4px; text-align: center; animation: glow 1.5s infinite alternate;">
+                        <p><i class="fas fa-check-circle"></i> Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapılacaktır.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-map">
+                <div class="map-overlay"></div>
+                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385398.5897809314!2d28.731984847996115!3d41.00498227625235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1623012335654!5m2!1str!2str" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Update admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+            }
+            
+            // Load contact info from localStorage if available
+            const savedContactInfo = localStorage.getItem('matrixBlogContactInfo');
+            if (savedContactInfo) {
+                const contactInfo = JSON.parse(savedContactInfo);
+                
+                // Update contact information
+                const contactItems = document.querySelectorAll('.contact-item');
+                
+                // Update email
+                if (contactInfo.email && contactItems[0]) {
+                    contactItems[0].querySelector('p').textContent = contactInfo.email;
+                }
+                
+                // Update phone
+                if (contactInfo.phone && contactItems[1]) {
+                    contactItems[1].querySelector('p').textContent = contactInfo.phone;
+                }
+                
+                // Update location
+                if (contactInfo.location && contactItems[2]) {
+                    contactItems[2].querySelector('p').textContent = contactInfo.location;
+                }
+                
+                // Update social media links
+                const socialLinks = document.querySelectorAll('.social-link');
+                
+                // GitHub
+                if (contactInfo.github && socialLinks[0]) {
+                    socialLinks[0].href = `https://github.com/${contactInfo.github}`;
+                    socialLinks[0].target = "_blank";
+                    socialLinks[0].rel = "noopener noreferrer";
+                }
+                
+                // LinkedIn
+                if (contactInfo.linkedin && socialLinks[1]) {
+                    socialLinks[1].href = `https://linkedin.com/in/${contactInfo.linkedin}`;
+                    socialLinks[1].target = "_blank";
+                    socialLinks[1].rel = "noopener noreferrer";
+                }
+                
+                // Twitter
+                if (contactInfo.twitter && socialLinks[2]) {
+                    socialLinks[2].href = `https://twitter.com/${contactInfo.twitter}`;
+                    socialLinks[2].target = "_blank";
+                    socialLinks[2].rel = "noopener noreferrer";
+                }
+                
+                // Instagram
+                if (contactInfo.instagram && socialLinks[3]) {
+                    socialLinks[3].href = `https://instagram.com/${contactInfo.instagram}`;
+                    socialLinks[3].target = "_blank";
+                    socialLinks[3].rel = "noopener noreferrer";
+                }
+                
+                // Update page title with name
+                if (contactInfo.name) {
+                    // Update page title
+                    const pageTitle = document.querySelector('.page-title');
+                    if (pageTitle) {
+                        pageTitle.textContent = `İletişim - ${contactInfo.name}`;
+                    }
+                    
+                    // Update document title
+                    document.title = `İletişim | ${contactInfo.name}`;
+                    
+                    // Update footer copyright
+                    const footerCopyright = document.querySelector('footer p:last-child');
+                    if (footerCopyright) {
+                        footerCopyright.textContent = `© 2024 Kişisel Blog - ${contactInfo.name}. Tüm Hakları Saklıdır.`;
+                    }
+                }
+                
+                // Update bio if available
+                if (contactInfo.bio) {
+                    const contactQuote = document.querySelector('.contact-quote p');
+                    if (contactQuote) {
+                        contactQuote.textContent = `"${contactInfo.bio}"`;
+                    }
+                }
+            }
+            
+            // Update site name from settings if available
+            const savedSettings = localStorage.getItem('matrixBlogSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                if (settings.siteName) {
+                    document.querySelector('.logo').textContent = settings.siteName.split(' | ')[0];
+                }
+            }
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            const messageSent = document.getElementById('messageSent');
+            const submitButton = document.getElementById('submitContactForm');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    try {
+                        // Disable submit button to prevent multiple submissions
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Gönderiliyor...';
+                        
+                        // Get form data
+                        const name = document.getElementById('contactName').value.trim();
+                        const email = document.getElementById('contactEmail').value.trim();
+                        const subject = document.getElementById('contactSubject').value.trim() || 'İletişim Formu Mesajı';
+                        const message = document.getElementById('contactMessage').value.trim();
+                        const date = new Date().toLocaleString('tr-TR');
+                        
+                        // Create message object
+                        const newMessage = {
+                            id: Date.now(),
+                            name,
+                            email,
+                            subject,
+                            message,
+                            date,
+                            read: false
+                        };
+                        
+                        // Get existing messages or create empty array
+                        let messages = localStorage.getItem('matrixBlogMessages');
+                        if (messages) {
+                            messages = JSON.parse(messages);
+                        } else {
+                            messages = [];
+                        }
+                        
+                        // Add new message to array
+                        messages.unshift(newMessage);
+                        
+                        // Save to localStorage
+                        localStorage.setItem('matrixBlogMessages', JSON.stringify(messages));
+                        
+                        // Show success message
+                        contactForm.reset();
+                        messageSent.innerHTML = '<p><i class="fas fa-check-circle"></i> <strong>Mesajınız başarıyla gönderildi!</strong> Mesajınız admin paneline kaydedilmiştir. En kısa sürede size dönüş yapılacaktır.</p>';
+                        messageSent.style.display = 'block';
+                        
+                        // Re-enable submit button
+                        setTimeout(() => {
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Gönder';
+                        }, 2000);
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            messageSent.style.display = 'none';
+                        }, 5000);
+                    } catch (error) {
+                        // Handle any potential errors
+                        console.error('Form submission error:', error);
+                        messageSent.innerHTML = '<p><i class="fas fa-exclamation-circle"></i> <strong>Mesajınız gönderilirken bir hata oluştu.</strong> Lütfen tekrar deneyiniz.</p>';
+                        messageSent.style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+                        messageSent.style.borderColor = '#ff5f56';
+                        messageSent.style.display = 'block';
+                        
+                        // Re-enable submit button
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Gönder';
+                        
+                        // Hide error message after 5 seconds
+                        setTimeout(() => {
+                            messageSent.style.display = 'none';
+                            messageSent.style.backgroundColor = 'rgba(0, 100, 0, 0.2)';
+                            messageSent.style.borderColor = 'var(--matrix-green)';
+                        }, 5000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
+>>>>>>> d950db16e52c9307ff1028d52cc493241d316c75

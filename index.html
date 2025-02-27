@@ -1,0 +1,515 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Bloğum | Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="hero">
+                <div class="hero-content">
+                    <h1>Merhaba, Ben <span class="highlight">Çağlar</span></h1>
+                    <p class="subtitle">Web Geliştirici & Dijital Düşünür</p>
+                    <p class="quote">"Gerçeklik nedir? Neden buradayız? İşte tüm sorular buradan başlar..."</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check - Kullanıcı girişi kontrolü
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force logout if forceLogout is set to true in localStorage
+            if (localStorage.getItem('forceLogout') === 'true') {
+                console.log("Force logout detected");
+                
+                // Save important data
+                const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                const siteSettings = localStorage.getItem('matrixBlogSettings');
+                const blogPosts = localStorage.getItem('matrixBlogPosts');
+                
+                // Clear storage
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Restore saved data
+                if (techNewsData) localStorage.setItem('matrixBlogTechNews', techNewsData);
+                if (contactInfo) localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                if (siteSettings) localStorage.setItem('matrixBlogSettings', siteSettings);
+                if (blogPosts) localStorage.setItem('matrixBlogPosts', blogPosts);
+                
+                // Set logout state
+                localStorage.setItem('matrixBlogLoggedIn', 'false');
+            }
+            
+            // Check for logout parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('logout') || urlParams.has('forcelogout')) {
+                // Additional cleanup on logout request
+                console.log("Logged out via URL parameter");
+                
+                // Save important data first
+                const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                const siteSettings = localStorage.getItem('matrixBlogSettings');
+                const blogPosts = localStorage.getItem('matrixBlogPosts');
+                
+                // TAMAMEN TEMİZLİK
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Restore saved data
+                if (techNewsData) localStorage.setItem('matrixBlogTechNews', techNewsData);
+                if (contactInfo) localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                if (siteSettings) localStorage.setItem('matrixBlogSettings', siteSettings);
+                if (blogPosts) localStorage.setItem('matrixBlogPosts', blogPosts);
+                
+                // Tüm çerezleri temizle
+                document.cookie.split(";").forEach(function(c) { 
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                });
+                
+                // Çıkış durumunu ayarla
+                localStorage.setItem('matrixBlogLoggedIn', 'false');
+                
+                // Başarılı çıkış mesajı göster
+                alert("Başarıyla çıkış yapıldı!");
+                
+                // Clear URL parameters
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            
+            // Check if user is logged in - must be exactly 'true', nothing else
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Add a logged in indicator to the admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+                
+                // Add emergency logout button
+                const navLinks = document.querySelector('.nav-links');
+                const emergencyLogout = document.createElement('li');
+                emergencyLogout.innerHTML = '<a href="#" class="emergency-logout"><i class="fas fa-power-off"></i> ACİL ÇIKIŞ</a>';
+                emergencyLogout.querySelector('a').style.backgroundColor = '#ff3e3e';
+                emergencyLogout.querySelector('a').style.color = '#fff';
+                navLinks.appendChild(emergencyLogout);
+                
+                // Add emergency logout functionality
+                emergencyLogout.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Save important data first
+                    const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                    const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                    const siteSettings = localStorage.getItem('matrixBlogSettings');
+                    const blogPosts = localStorage.getItem('matrixBlogPosts');
+                    
+                    // COMPLETE CLEANUP
+                    console.log("ACİL ÇIKIŞ YAPILIYOR!");
+                    alert("ACİL ÇIKIŞ YAPILIYOR! Tüm oturum verileri temizleniyor...");
+                    
+                    // Clear everything
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    
+                    // Restore saved data
+                    if (techNewsData) localStorage.setItem('matrixBlogTechNews', techNewsData);
+                    if (contactInfo) localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                    if (siteSettings) localStorage.setItem('matrixBlogSettings', siteSettings);
+                    if (blogPosts) localStorage.setItem('matrixBlogPosts', blogPosts);
+                    
+                    // Clear all cookies
+                    document.cookie.split(";").forEach(function(c) { 
+                        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                    });
+                    
+                    // Force reload
+                    window.location.href = 'admin.html?forcelogout=true';
+                });
+            }
+            
+            // Update site name and description from saved settings if available
+            const savedSettings = localStorage.getItem('matrixBlogSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                if (settings.siteName) {
+                    document.title = settings.siteName;
+                    document.querySelector('.logo').textContent = settings.siteName.split(' | ')[0];
+                }
+                
+                const subtitle = document.querySelector('.subtitle');
+                if (subtitle && settings.siteDescription) {
+                    subtitle.textContent = settings.siteDescription;
+                }
+            }
+            
+            // Update social links and contact info from saved contact info if available
+            const savedContactInfo = localStorage.getItem('matrixBlogContactInfo');
+            if (savedContactInfo) {
+                const contactInfo = JSON.parse(savedContactInfo);
+                
+                // Update name in hero section
+                if (contactInfo.name) {
+                    const nameElement = document.querySelector('#hero h1 .highlight');
+                    if (nameElement) {
+                        nameElement.textContent = contactInfo.name;
+                    }
+                    
+                    // Update footer copyright
+                    const footerCopyright = document.querySelector('footer p:last-child');
+                    if (footerCopyright) {
+                        footerCopyright.textContent = `© 2024 Kişisel Blog - ${contactInfo.name}. Tüm Hakları Saklıdır.`;
+                    }
+                }
+                
+                // Update bio/quote if available
+                if (contactInfo.bio) {
+                    const quoteElement = document.querySelector('.quote');
+                    if (quoteElement) {
+                        quoteElement.textContent = `"${contactInfo.bio}"`;
+                    }
+                }
+                
+                // Update social links
+                const socialLinks = document.querySelector('.social-links');
+                
+                if (socialLinks) {
+                    const links = socialLinks.querySelectorAll('a');
+                    
+                    // GitHub
+                    if (contactInfo.github && links[0]) {
+                        links[0].href = `https://github.com/${contactInfo.github}`;
+                        links[0].target = "_blank";
+                        links[0].rel = "noopener noreferrer";
+                    }
+                    
+                    // LinkedIn
+                    if (contactInfo.linkedin && links[1]) {
+                        links[1].href = `https://linkedin.com/in/${contactInfo.linkedin}`;
+                        links[1].target = "_blank";
+                        links[1].rel = "noopener noreferrer";
+                    }
+                    
+                    // Twitter
+                    if (contactInfo.twitter && links[2]) {
+                        links[2].href = `https://twitter.com/${contactInfo.twitter}`;
+                        links[2].target = "_blank";
+                        links[2].rel = "noopener noreferrer";
+                    }
+                    
+                    // Instagram
+                    if (contactInfo.instagram && links[3]) {
+                        links[3].href = `https://instagram.com/${contactInfo.instagram}`;
+                        links[3].target = "_blank";
+                        links[3].rel = "noopener noreferrer";
+                    }
+                }
+            }
+        });
+    </script>
+    <style>
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</body>
+</html> 
+=======
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Bloğum | Çağlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <nav>
+            <div class="logo">Kişisel Blog</div>
+            <ul class="nav-links">
+                <li><a href="hakkimda.html">Hakkımda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tech-news.html">Tech&News</a></li>
+                <li><a href="bilim-felsefe.html">Bilim&Felsefe</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="admin.html" class="admin-link">Admin</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="hero">
+                <div class="hero-content">
+                    <h1>Merhaba, Ben <span class="highlight">Çağlar</span></h1>
+                    <p class="subtitle">Web Geliştirici & Dijital Düşünür</p>
+                    <p class="quote">"Gerçeklik nedir? Neden buradayız? İşte tüm sorular buradan başlar..."</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Kişisel Blog - Çağlar. Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+
+    <script src="matrix.js"></script>
+    <script>
+        // Login status check - Kullanıcı girişi kontrolü
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force logout if forceLogout is set to true in localStorage
+            if (localStorage.getItem('forceLogout') === 'true') {
+                console.log("Force logout detected");
+                
+                // Save important data
+                const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                const siteSettings = localStorage.getItem('matrixBlogSettings');
+                const blogPosts = localStorage.getItem('matrixBlogPosts');
+                
+                // Clear storage
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Restore saved data
+                if (techNewsData) localStorage.setItem('matrixBlogTechNews', techNewsData);
+                if (contactInfo) localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                if (siteSettings) localStorage.setItem('matrixBlogSettings', siteSettings);
+                if (blogPosts) localStorage.setItem('matrixBlogPosts', blogPosts);
+                
+                // Set logout state
+                localStorage.setItem('matrixBlogLoggedIn', 'false');
+            }
+            
+            // Check for logout parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('logout') || urlParams.has('forcelogout')) {
+                // Additional cleanup on logout request
+                console.log("Logged out via URL parameter");
+                
+                // Save important data first
+                const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                const siteSettings = localStorage.getItem('matrixBlogSettings');
+                const blogPosts = localStorage.getItem('matrixBlogPosts');
+                
+                // TAMAMEN TEMİZLİK
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Restore saved data
+                if (techNewsData) localStorage.setItem('matrixBlogTechNews', techNewsData);
+                if (contactInfo) localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                if (siteSettings) localStorage.setItem('matrixBlogSettings', siteSettings);
+                if (blogPosts) localStorage.setItem('matrixBlogPosts', blogPosts);
+                
+                // Tüm çerezleri temizle
+                document.cookie.split(";").forEach(function(c) { 
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                });
+                
+                // Çıkış durumunu ayarla
+                localStorage.setItem('matrixBlogLoggedIn', 'false');
+                
+                // Başarılı çıkış mesajı göster
+                alert("Başarıyla çıkış yapıldı!");
+                
+                // Clear URL parameters
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            
+            // Check if user is logged in - must be exactly 'true', nothing else
+            const isLoggedIn = localStorage.getItem('matrixBlogLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                // Add a logged in indicator to the admin link
+                const adminLink = document.querySelector('.admin-link');
+                adminLink.innerHTML = '<i class="fas fa-user-check"></i> Admin <span class="login-indicator"></span>';
+                adminLink.style.backgroundColor = 'var(--matrix-dark-green)';
+                adminLink.style.color = 'var(--matrix-green)';
+                adminLink.href = 'admin-dashboard.html'; // Direct to dashboard instead of login
+                
+                // Add emergency logout button
+                const navLinks = document.querySelector('.nav-links');
+                const emergencyLogout = document.createElement('li');
+                emergencyLogout.innerHTML = '<a href="#" class="emergency-logout"><i class="fas fa-power-off"></i> ACİL ÇIKIŞ</a>';
+                emergencyLogout.querySelector('a').style.backgroundColor = '#ff3e3e';
+                emergencyLogout.querySelector('a').style.color = '#fff';
+                navLinks.appendChild(emergencyLogout);
+                
+                // Add emergency logout functionality
+                emergencyLogout.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Save important data first
+                    const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                    const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                    const siteSettings = localStorage.getItem('matrixBlogSettings');
+                    const blogPosts = localStorage.getItem('matrixBlogPosts');
+                    
+                    // COMPLETE CLEANUP
+                    console.log("ACİL ÇIKIŞ YAPILIYOR!");
+                    alert("ACİL ÇIKIŞ YAPILIYOR! Tüm oturum verileri temizleniyor...");
+                    
+                    // Clear everything
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    
+                    // Restore saved data
+                    if (techNewsData) localStorage.setItem('matrixBlogTechNews', techNewsData);
+                    if (contactInfo) localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                    if (siteSettings) localStorage.setItem('matrixBlogSettings', siteSettings);
+                    if (blogPosts) localStorage.setItem('matrixBlogPosts', blogPosts);
+                    
+                    // Clear all cookies
+                    document.cookie.split(";").forEach(function(c) { 
+                        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                    });
+                    
+                    // Force reload
+                    window.location.href = 'admin.html?forcelogout=true';
+                });
+            }
+            
+            // Update site name and description from saved settings if available
+            const savedSettings = localStorage.getItem('matrixBlogSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                if (settings.siteName) {
+                    document.title = settings.siteName;
+                    document.querySelector('.logo').textContent = settings.siteName.split(' | ')[0];
+                }
+                
+                const subtitle = document.querySelector('.subtitle');
+                if (subtitle && settings.siteDescription) {
+                    subtitle.textContent = settings.siteDescription;
+                }
+            }
+            
+            // Update social links and contact info from saved contact info if available
+            const savedContactInfo = localStorage.getItem('matrixBlogContactInfo');
+            if (savedContactInfo) {
+                const contactInfo = JSON.parse(savedContactInfo);
+                
+                // Update name in hero section
+                if (contactInfo.name) {
+                    const nameElement = document.querySelector('#hero h1 .highlight');
+                    if (nameElement) {
+                        nameElement.textContent = contactInfo.name;
+                    }
+                    
+                    // Update footer copyright
+                    const footerCopyright = document.querySelector('footer p:last-child');
+                    if (footerCopyright) {
+                        footerCopyright.textContent = `© 2024 Kişisel Blog - ${contactInfo.name}. Tüm Hakları Saklıdır.`;
+                    }
+                }
+                
+                // Update bio/quote if available
+                if (contactInfo.bio) {
+                    const quoteElement = document.querySelector('.quote');
+                    if (quoteElement) {
+                        quoteElement.textContent = `"${contactInfo.bio}"`;
+                    }
+                }
+                
+                // Update social links
+                const socialLinks = document.querySelector('.social-links');
+                
+                if (socialLinks) {
+                    const links = socialLinks.querySelectorAll('a');
+                    
+                    // GitHub
+                    if (contactInfo.github && links[0]) {
+                        links[0].href = `https://github.com/${contactInfo.github}`;
+                        links[0].target = "_blank";
+                        links[0].rel = "noopener noreferrer";
+                    }
+                    
+                    // LinkedIn
+                    if (contactInfo.linkedin && links[1]) {
+                        links[1].href = `https://linkedin.com/in/${contactInfo.linkedin}`;
+                        links[1].target = "_blank";
+                        links[1].rel = "noopener noreferrer";
+                    }
+                    
+                    // Twitter
+                    if (contactInfo.twitter && links[2]) {
+                        links[2].href = `https://twitter.com/${contactInfo.twitter}`;
+                        links[2].target = "_blank";
+                        links[2].rel = "noopener noreferrer";
+                    }
+                    
+                    // Instagram
+                    if (contactInfo.instagram && links[3]) {
+                        links[3].href = `https://instagram.com/${contactInfo.instagram}`;
+                        links[3].target = "_blank";
+                        links[3].rel = "noopener noreferrer";
+                    }
+                }
+            }
+        });
+    </script>
+    <style>
+        .login-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--matrix-green);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 5px var(--matrix-green);
+        }
+    </style>
+</body>
+</html> 
+>>>>>>> d950db16e52c9307ff1028d52cc493241d316c75

@@ -1,0 +1,835 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Girişi | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', monospace;
+        }
+        
+        :root {
+            --matrix-green: #00ff41;
+            --matrix-dark-green: #003b00;
+            --matrix-black: #0d0208;
+            --matrix-grey: #222;
+            --glow-shadow: 0 0 10px var(--matrix-green), 0 0 20px var(--matrix-green);
+        }
+        
+        body {
+            background-color: var(--matrix-black);
+            color: var(--matrix-green);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background-color: rgba(0, 30, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+            }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            font-size: 2rem;
+            text-shadow: var(--glow-shadow);
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            opacity: 0.7;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            background-color: rgba(0, 20, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 4px;
+            color: var(--matrix-green);
+            font-family: 'Consolas', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            color: var(--matrix-green);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-top: 30px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .btn:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+            text-shadow: none;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-link a {
+            color: var(--matrix-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link a:hover {
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .code-text {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            color: var(--matrix-green);
+            font-size: 0.7rem;
+            opacity: 0.1;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        /* Added for the error message */
+        .error-message {
+            color: #ff3e3e;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Added for remember me checkbox */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .remember-me input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .remember-me label {
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Admin Girişi</h1>
+                <p>Kişisel Blog'a hoş geldiniz</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Kullanıcı Adı</label>
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Neo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="********" required>
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Beni hatırla</label>
+                </div>
+                
+                <div class="error-message" id="errorMessage">Kullanıcı adı veya şifre hatalı!</div>
+                
+                <button type="submit" class="btn">GİRİŞ</button>
+            </form>
+        </div>
+        
+        <div class="back-link">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Ana Sayfaya Dön</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Her sayfayı yenilemede temizlik yap
+            function cleanupLogoutData() {
+                if (localStorage.getItem('matrixBlogLoggedIn') !== 'true') {
+                    localStorage.removeItem('matrixBlogLoggedIn');
+                    localStorage.removeItem('forceLogout');
+                    localStorage.removeItem('logoutTimestamp');
+                }
+            }
+            
+            cleanupLogoutData();
+            
+            // Matrix Canvas Effect
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions to match the window
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // ENHANCED LOGOUT HANDLING
+            // Check if we were redirected here from a logout action
+            const forceLogout = localStorage.getItem('forceLogout');
+            if (forceLogout === 'true') {
+                // First save important data before clearing
+                const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                const siteSettings = localStorage.getItem('matrixBlogSettings');
+                const savedUsername = localStorage.getItem('matrixBlogUsername');
+                const blogPosts = localStorage.getItem('matrixBlogPosts');
+                
+                // TAMAMEN TEMİZLİK - DAHA GÜÇLÜ ÇIKIŞ
+                console.log("Çıkış yapılıyor...");
+                
+                // Önce tüm localStorage ve sessionStorage'ı temizle
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Restore saved data
+                if (techNewsData) {
+                    localStorage.setItem('matrixBlogTechNews', techNewsData);
+                }
+                if (contactInfo) {
+                    localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                }
+                if (siteSettings) {
+                    localStorage.setItem('matrixBlogSettings', siteSettings);
+                }
+                if (savedUsername) {
+                    localStorage.setItem('matrixBlogUsername', savedUsername);
+                }
+                if (blogPosts) {
+                    localStorage.setItem('matrixBlogPosts', blogPosts);
+                }
+                
+                // Sonra özel olarak login durumunu temizle
+                localStorage.removeItem('matrixBlogLoggedIn');
+                sessionStorage.removeItem('matrixBlogLoggedIn');
+                
+                // Tüm çerezleri temizle
+                document.cookie.split(";").forEach(function(c) { 
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                });
+                
+                // Çıkış bayrağını temizle
+                localStorage.removeItem('forceLogout');
+                
+                // Çıkış zaman damgası ekle
+                localStorage.setItem('logoutTimestamp', Date.now().toString());
+                
+                // Mesaj göster
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.textContent = "Başarıyla çıkış yapıldı.";
+                errorMessage.style.color = "#00ff41";
+                errorMessage.style.display = "block";
+            }
+            
+            // Characters to display in the matrix rain
+            const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+            const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            const nums = '0123456789';
+            const binary = '01';
+            
+            // Combine all character sets
+            const chars = katakana + latin + nums + binary;
+            
+            // Matrix columns (1 per 20px of width)
+            const columns = Math.floor(canvas.width / 20);
+            // Array to track the y position of each column
+            const drops = [];
+            
+            // Initialize all drops to start at random positions
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height);
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 8, 2, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.font = '15px Consolas';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    
+                    ctx.fillStyle = i % 2 === 0 ? 'rgba(0, 255, 70, 1)' : 'rgba(0, 255, 70, 0.8)';
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    
+                    drops[i]++;
+                    
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                }
+            }
+            
+            setInterval(draw, 50);
+            
+            // Handle login form submission
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+                const remember = document.getElementById('remember').checked;
+                
+                // Check if we recently logged out (within the last 2 seconds)
+                const logoutTimestamp = localStorage.getItem('logoutTimestamp');
+                if (logoutTimestamp && (Date.now() - parseInt(logoutTimestamp)) < 2000) {
+                    // Prevent immediate re-login after logout
+                    errorMessage.textContent = "Lütfen tekrar giriş yapmadan önce birkaç saniye bekleyin.";
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                // Simple admin authentication
+                // In a real application, this would be handled server-side
+                if (username === 'admin' && password === 'matrix123') {
+                    // Clear any logout flags
+                    localStorage.removeItem('forceLogout');
+                    localStorage.removeItem('logoutTimestamp');
+                    
+                    // Set login status
+                    localStorage.setItem('matrixBlogLoggedIn', 'true');
+                    
+                    // Store credentials if remember me is checked
+                    if (remember) {
+                        localStorage.setItem('matrixBlogUsername', username);
+                    } else {
+                        localStorage.removeItem('matrixBlogUsername');
+                    }
+                    
+                    // Redirect to admin dashboard
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    // Show error message
+                    errorMessage.textContent = "Kullanıcı adı veya şifre hatalı!";
+                    errorMessage.style.color = "#ff3e3e";
+                    errorMessage.style.display = 'block';
+                    
+                    // Clear password field
+                    document.getElementById('password').value = '';
+                }
+            });
+            
+            // Check if username is stored in localStorage (remember me)
+            const savedUsername = localStorage.getItem('matrixBlogUsername');
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+                document.getElementById('remember').checked = true;
+            }
+        });
+    </script>
+</body>
+</html> 
+=======
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Girişi | Kişisel Blog - Çağlar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', monospace;
+        }
+        
+        :root {
+            --matrix-green: #00ff41;
+            --matrix-dark-green: #003b00;
+            --matrix-black: #0d0208;
+            --matrix-grey: #222;
+            --glow-shadow: 0 0 10px var(--matrix-green), 0 0 20px var(--matrix-green);
+        }
+        
+        body {
+            background-color: var(--matrix-black);
+            color: var(--matrix-green);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background-color: rgba(0, 30, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+            }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            font-size: 2rem;
+            text-shadow: var(--glow-shadow);
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            opacity: 0.7;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            background-color: rgba(0, 20, 0, 0.7);
+            border: 1px solid var(--matrix-green);
+            border-radius: 4px;
+            color: var(--matrix-green);
+            font-family: 'Consolas', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            color: var(--matrix-green);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-top: 30px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .btn:hover {
+            background-color: var(--matrix-green);
+            color: var(--matrix-black);
+            box-shadow: var(--glow-shadow);
+            text-shadow: none;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-link a {
+            color: var(--matrix-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link a:hover {
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .code-text {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            color: var(--matrix-green);
+            font-size: 0.7rem;
+            opacity: 0.1;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        /* Added for the error message */
+        .error-message {
+            color: #ff3e3e;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Added for remember me checkbox */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .remember-me input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .remember-me label {
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Admin Girişi</h1>
+                <p>Kişisel Blog'a hoş geldiniz</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Kullanıcı Adı</label>
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Neo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="********" required>
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Beni hatırla</label>
+                </div>
+                
+                <div class="error-message" id="errorMessage">Kullanıcı adı veya şifre hatalı!</div>
+                
+                <button type="submit" class="btn">GİRİŞ</button>
+            </form>
+        </div>
+        
+        <div class="back-link">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Ana Sayfaya Dön</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Her sayfayı yenilemede temizlik yap
+            function cleanupLogoutData() {
+                if (localStorage.getItem('matrixBlogLoggedIn') !== 'true') {
+                    localStorage.removeItem('matrixBlogLoggedIn');
+                    localStorage.removeItem('forceLogout');
+                    localStorage.removeItem('logoutTimestamp');
+                }
+            }
+            
+            cleanupLogoutData();
+            
+            // Matrix Canvas Effect
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions to match the window
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // ENHANCED LOGOUT HANDLING
+            // Check if we were redirected here from a logout action
+            const forceLogout = localStorage.getItem('forceLogout');
+            if (forceLogout === 'true') {
+                // First save important data before clearing
+                const techNewsData = localStorage.getItem('matrixBlogTechNews');
+                const contactInfo = localStorage.getItem('matrixBlogContactInfo');
+                const siteSettings = localStorage.getItem('matrixBlogSettings');
+                const savedUsername = localStorage.getItem('matrixBlogUsername');
+                const blogPosts = localStorage.getItem('matrixBlogPosts');
+                
+                // TAMAMEN TEMİZLİK - DAHA GÜÇLÜ ÇIKIŞ
+                console.log("Çıkış yapılıyor...");
+                
+                // Önce tüm localStorage ve sessionStorage'ı temizle
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Restore saved data
+                if (techNewsData) {
+                    localStorage.setItem('matrixBlogTechNews', techNewsData);
+                }
+                if (contactInfo) {
+                    localStorage.setItem('matrixBlogContactInfo', contactInfo);
+                }
+                if (siteSettings) {
+                    localStorage.setItem('matrixBlogSettings', siteSettings);
+                }
+                if (savedUsername) {
+                    localStorage.setItem('matrixBlogUsername', savedUsername);
+                }
+                if (blogPosts) {
+                    localStorage.setItem('matrixBlogPosts', blogPosts);
+                }
+                
+                // Sonra özel olarak login durumunu temizle
+                localStorage.removeItem('matrixBlogLoggedIn');
+                sessionStorage.removeItem('matrixBlogLoggedIn');
+                
+                // Tüm çerezleri temizle
+                document.cookie.split(";").forEach(function(c) { 
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                });
+                
+                // Çıkış bayrağını temizle
+                localStorage.removeItem('forceLogout');
+                
+                // Çıkış zaman damgası ekle
+                localStorage.setItem('logoutTimestamp', Date.now().toString());
+                
+                // Mesaj göster
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.textContent = "Başarıyla çıkış yapıldı.";
+                errorMessage.style.color = "#00ff41";
+                errorMessage.style.display = "block";
+            }
+            
+            // Characters to display in the matrix rain
+            const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+            const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            const nums = '0123456789';
+            const binary = '01';
+            
+            // Combine all character sets
+            const chars = katakana + latin + nums + binary;
+            
+            // Matrix columns (1 per 20px of width)
+            const columns = Math.floor(canvas.width / 20);
+            // Array to track the y position of each column
+            const drops = [];
+            
+            // Initialize all drops to start at random positions
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height);
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 8, 2, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.font = '15px Consolas';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    
+                    ctx.fillStyle = i % 2 === 0 ? 'rgba(0, 255, 70, 1)' : 'rgba(0, 255, 70, 0.8)';
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    
+                    drops[i]++;
+                    
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                }
+            }
+            
+            setInterval(draw, 50);
+            
+            // Handle login form submission
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+                const remember = document.getElementById('remember').checked;
+                
+                // Check if we recently logged out (within the last 2 seconds)
+                const logoutTimestamp = localStorage.getItem('logoutTimestamp');
+                if (logoutTimestamp && (Date.now() - parseInt(logoutTimestamp)) < 2000) {
+                    // Prevent immediate re-login after logout
+                    errorMessage.textContent = "Lütfen tekrar giriş yapmadan önce birkaç saniye bekleyin.";
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                // Simple admin authentication
+                // In a real application, this would be handled server-side
+                if (username === 'admin' && password === 'matrix123') {
+                    // Clear any logout flags
+                    localStorage.removeItem('forceLogout');
+                    localStorage.removeItem('logoutTimestamp');
+                    
+                    // Set login status
+                    localStorage.setItem('matrixBlogLoggedIn', 'true');
+                    
+                    // Store credentials if remember me is checked
+                    if (remember) {
+                        localStorage.setItem('matrixBlogUsername', username);
+                    } else {
+                        localStorage.removeItem('matrixBlogUsername');
+                    }
+                    
+                    // Redirect to admin dashboard
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    // Show error message
+                    errorMessage.textContent = "Kullanıcı adı veya şifre hatalı!";
+                    errorMessage.style.color = "#ff3e3e";
+                    errorMessage.style.display = 'block';
+                    
+                    // Clear password field
+                    document.getElementById('password').value = '';
+                }
+            });
+            
+            // Check if username is stored in localStorage (remember me)
+            const savedUsername = localStorage.getItem('matrixBlogUsername');
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+                document.getElementById('remember').checked = true;
+            }
+        });
+    </script>
+</body>
+</html> 
+>>>>>>> d950db16e52c9307ff1028d52cc493241d316c75
